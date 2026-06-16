@@ -1,0 +1,8 @@
+{
+  "name": "TOLK × USITE 2026",
+  "description": "Minimalist director-level B2B presentation focusing on design, AI, and digital systems for business efficiency.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
