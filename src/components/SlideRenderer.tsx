@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { SlideContent } from '../types';
+import { resolveAssetPath } from '../utils/resolveAssetPath';
 
 const CaseModal = lazy(() => import('./CaseModal').then(m => ({ default: m.CaseModal })));
 import { 
@@ -320,7 +321,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               >
                 <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
                 <img 
-                  src={slide.data.image} 
+                  src={resolveAssetPath(slide.data.image)} 
                   alt="Hero" 
                   className="block w-full h-auto object-contain transition-transform duration-[2s]"
                   referrerPolicy="no-referrer"
@@ -450,7 +451,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                   className="hidden lg:block relative w-full rounded-3xl md:rounded-[4rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000"
                 >
                   <img 
-                    src={slide.data.image} 
+                    src={resolveAssetPath(slide.data.image)} 
                     alt="Section visual" 
                     className="block w-full h-auto object-contain transition-transform duration-[2s]"
                     referrerPolicy="no-referrer"
@@ -528,7 +529,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                 className="relative aspect-square md:aspect-[4/5] rounded-3xl md:rounded-[4rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-[1.5s]"
               >
                 <img 
-                  src={slide.image} 
+                  src={resolveAssetPath(slide.image)} 
                   alt="Team background" 
                   className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[2s]"
                   referrerPolicy="no-referrer"
@@ -609,7 +610,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                       {item.image && (
                         <div className="aspect-[4/3] mb-8 rounded-2xl md:rounded-[2rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 bg-gray-50 dark:bg-white/5 flex items-center justify-center">
                           <img 
-                            src={item.image} 
+                            src={resolveAssetPath(item.image)} 
                             alt={item.client} 
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                             referrerPolicy="no-referrer"
@@ -761,7 +762,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                 <motion.div variants={itemVariants} className="group">
                   <div className="aspect-[4/3] rounded-[3rem] overflow-hidden bg-gray-50 dark:bg-white/5 mb-10 grayscale hover:grayscale-0 transition-all duration-700">
                     <img 
-                      src={slide.data.catalon.image} 
+                      src={resolveAssetPath(slide.data.catalon.image)} 
                       alt={slide.data.catalon.name} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       referrerPolicy="no-referrer"
@@ -783,7 +784,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                 <motion.div variants={itemVariants} className="group">
                   <div className="aspect-[4/3] rounded-[3rem] overflow-hidden bg-gray-50 dark:bg-white/5 mb-10 grayscale hover:grayscale-0 transition-all duration-700">
                     <img 
-                      src={slide.data.future.image} 
+                      src={resolveAssetPath(slide.data.future.image)} 
                       alt={slide.data.future.name} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       referrerPolicy="no-referrer"
@@ -808,7 +809,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
                   <div className="aspect-[4/3] rounded-3xl md:rounded-[3rem] overflow-hidden bg-gray-50 dark:bg-white/5 mb-0 grayscale hover:grayscale-0 transition-all duration-700 order-2 md:order-1">
                     <img 
-                      src={slide.data.smm.image} 
+                      src={resolveAssetPath(slide.data.smm.image)} 
                       alt={slide.data.smm.name} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       referrerPolicy="no-referrer"

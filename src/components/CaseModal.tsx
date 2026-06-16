@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, AlertCircle, Zap, Sparkles, Target, ArrowLeft, ArrowRight } from 'lucide-react';
 import { DynamicIcon } from './SlideRenderer';
+import { resolveAssetPath } from '../utils/resolveAssetPath';
 
 interface CaseModalProps {
   isOpen: boolean;
@@ -89,7 +90,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeImageIdx}
-                    src={gallery[activeImageIdx]}
+                    src={resolveAssetPath(gallery[activeImageIdx])}
                     alt={`${caseData.client} ${activeImageIdx + 1}`}
                     initial={{ opacity: 0, scale: 1.1 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -159,7 +160,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                           activeImageIdx === idx ? 'ring-2 ring-accent scale-95' : 'opacity-40 hover:opacity-100'
                         }`}
                       >
-                        <img src={img} className="w-full h-full object-cover" alt="" />
+                        <img src={resolveAssetPath(img)} className="w-full h-full object-cover" alt="" />
                       </button>
                     ))}
                   </div>
