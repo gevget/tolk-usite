@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tolk-usite.ru/sitemap.xml
+Sitemap: https://gevget.github.io/tolk-usite/sitemap.xml
