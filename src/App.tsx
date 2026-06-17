@@ -3,16 +3,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { SLIDES } from './types.ts';
-import { SlideRenderer } from './components/SlideRenderer.tsx';
-import { CursorFollower } from './components/CursorFollower.tsx';
-import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
-import { MousePointer2, Sun, Moon, Menu, X as CloseIcon } from 'lucide-react';
 import React from 'react';
+import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react';
+import { Menu, Moon, MousePointer2, Sun, X as CloseIcon } from 'lucide-react';
+import { SlideRenderer } from './components/SlideRenderer.tsx';
+import { SLIDES } from './types.ts';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [activeSection, setActiveSection] = React.useState('slide-1');
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -35,24 +35,22 @@ export default function App() {
     }
   }, [isDark]);
 
-  const [activeSection, setActiveSection] = React.useState('slide-1');
-
   React.useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -70% 0px',
-      threshold: 0,
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0,
+      },
+    );
 
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
     const sections = document.querySelectorAll('[id^="slide-"]');
     sections.forEach((section) => observer.observe(section));
 
@@ -69,18 +67,18 @@ export default function App() {
 
   const navItems = [
     { label: 'Старт', id: 'slide-1' },
-    { label: 'Манифест', id: 'slide-manifest' },
-    { label: 'Услуги', id: 'slide-4' },
-    { label: 'Архитектура', id: 'slide-7' },
+    { label: 'С чего начать', id: 'slide-start' },
+    { label: 'Клиенты', id: 'slide-10' },
+    { label: 'Проблемы', id: 'slide-problems' },
     { label: 'AI', id: 'slide-8' },
-    { label: 'Команда', id: 'slide-9' },
+    { label: 'Команда', id: 'slide-why' },
     { label: 'Кейсы', id: 'slide-11' },
-    { label: 'Деятельность', id: 'slide-activities' },
+    { label: 'Продукты', id: 'slide-12' },
+    { label: 'Контакты', id: 'slide-13' },
   ];
 
   return (
     <div className={`relative selection:bg-accent/20 selection:text-brand transition-colors duration-500 ${isDark ? 'dark' : ''}`}>
-      <CursorFollower />
       <div className="grain-overlay" />
       <div className="flowing-bg" />
 
@@ -113,23 +111,28 @@ export default function App() {
             ))}
           </nav>
         </div>
+
         <div className="flex items-center gap-2 md:gap-4">
           <button
             onClick={() => setIsDark(!isDark)}
             className="p-2 text-gray-400 dark:text-gray-400 hover:text-brand dark:hover:text-white transition-colors"
             aria-label={isDark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему'}
           >
-            {isDark ? <Sun className="w-4 h-4 text-yellow-400 fill-yellow-400 filter drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]" /> : <Moon className="w-4 h-4 text-gray-400" />}
+            {isDark ? (
+              <Sun className="w-4 h-4 text-yellow-400 fill-yellow-400 filter drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]" />
+            ) : (
+              <Moon className="w-4 h-4 text-gray-400" />
+            )}
           </button>
           <button
             onClick={() => scrollToSection('slide-13')}
             className="hidden sm:block px-6 py-1.5 bg-gray-900 dark:bg-white dark:text-black text-white text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-accent hover:text-white transition-all shadow-lg hover:shadow-accent/20 active:scale-95"
           >
-            Запустить проект
+            Обсудить проект
           </button>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-gray-400 dark:text-gray-600"
+            className="lg:hidden p-2 text-gray-400 dark:text-gray-300"
             aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
             aria-expanded={isMenuOpen}
           >
@@ -168,17 +171,14 @@ export default function App() {
                 onClick={() => scrollToSection('slide-13')}
                 className="w-full py-6 bg-brand dark:bg-white text-white dark:text-black rounded-3xl font-display font-medium text-xl shadow-2xl"
               >
-                Запустить проект
+                Обсудить проект
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <motion.div
-        className="fixed top-12 left-0 right-0 h-0.5 bg-accent origin-left z-50"
-        style={{ scaleX }}
-      />
+      <motion.div className="fixed top-12 left-0 right-0 h-0.5 bg-accent origin-left z-50" style={{ scaleX }} />
 
       <main className="snap-y snap-mandatory bg-white dark:bg-[#050505] scroll-pt-12 transition-colors duration-500 overflow-hidden">
         {SLIDES.map((slide) => (
@@ -190,7 +190,7 @@ export default function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
-        className="fixed bottom-10 right-10 z-40 flex items-center gap-6 text-gray-300 dark:text-gray-700 text-[10px] font-bold uppercase tracking-[0.3em] pointer-events-none transition-colors"
+        className="fixed bottom-10 right-10 z-40 hidden md:flex items-center gap-6 text-gray-300 dark:text-gray-700 text-[10px] font-bold uppercase tracking-[0.3em] pointer-events-none transition-colors"
       >
         <span className="dark:text-white/20 italic">deploying future</span>
         <div className="w-12 h-px bg-gray-200 dark:bg-white/5" />
@@ -199,18 +199,12 @@ export default function App() {
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-30 dark:opacity-60">
         <motion.div
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -50, 0],
-          }}
+          animate={{ x: [0, 50, 0], y: [0, -50, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
           className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-blue-100 dark:bg-blue-900/30 blur-[140px] rounded-full"
         />
         <motion.div
-          animate={{
-            x: [0, -70, 0],
-            y: [0, 30, 0],
-          }}
+          animate={{ x: [0, -70, 0], y: [0, 30, 0] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
           className="absolute top-[60%] -right-[5%] w-[40%] h-[40%] bg-indigo-50 dark:bg-purple-900/20 blur-[120px] rounded-full"
         />

@@ -69,7 +69,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/90 backdrop-blur-md z-0"
+            className="fixed inset-0 bg-black/50 backdrop-blur-md z-0"
           />
 
           <div className="relative min-h-full flex items-start justify-center p-0 md:p-12 z-10 pointer-events-none">
