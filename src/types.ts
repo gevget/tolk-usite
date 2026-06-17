@@ -188,6 +188,23 @@ const LEGACY_SLIDES: SlideContent[] = [
     }
   },
   {
+    id: 'slide-7',
+    type: 'list',
+    title: 'Наш главный скилл — кабинеты и системы',
+    subtitle: 'Личные кабинеты, B2B-платформы, дилерские и партнёрские системы — одна из наших самых сильных и прикладных компетенций.',
+    points: [
+      { text: 'Заявки и статусы', icon: 'CheckCircle2' },
+      { text: 'Документы и прайсы', icon: 'FileText' },
+      { text: 'Каталоги и остатки', icon: 'Layers' },
+      { text: 'Роли и права', icon: 'ShieldCheck' },
+      { text: 'Аналитика и маршруты', icon: 'LineChart' },
+      { text: 'AI-поиск и помощь сотрудникам', icon: 'Sparkles' }
+    ],
+    data: {
+      image: '/skill.png'
+    }
+  },
+  {
     id: 'slide-8',
     type: 'list',
     title: 'AI inside, а не «чатик ради галочки»',
@@ -1013,5 +1030,26 @@ if (whatSlide && Array.isArray(whatSlide.data) && whatSlide.data.length === 5) {
     title: 'Automation Layer',
     details: 'Интеграции, сценарии автоматизации и связка систем.',
     icon: 'RefreshCw',
+  });
+}
+
+if (!SLIDES.some((slide) => slide.id === 'slide-7')) {
+  const insertIndex = SLIDES.findIndex((slide) => slide.id === 'slide-8');
+  SLIDES.splice(insertIndex === -1 ? 0 : insertIndex, 0, {
+    id: 'slide-7',
+    type: 'list',
+    title: 'Наш главный скилл — кабинеты и системы',
+    subtitle: 'Личные кабинеты, B2B-платформы, дилерские и партнёрские системы — одна из наших самых сильных и прикладных компетенций.',
+    points: [
+      { text: 'Заявки и статусы', icon: 'CheckCircle2' },
+      { text: 'Документы и прайсы', icon: 'FileText' },
+      { text: 'Каталоги и остатки', icon: 'Layers' },
+      { text: 'Роли и права', icon: 'ShieldCheck' },
+      { text: 'Аналитика и маршруты', icon: 'LineChart' },
+      { text: 'AI-поиск и помощь сотрудникам', icon: 'Sparkles' },
+    ],
+    data: {
+      image: '/skill.png',
+    },
   });
 }

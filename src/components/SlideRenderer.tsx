@@ -420,7 +420,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
 
   const renderList = () => {
     const hasImage = Boolean(slide.data?.image);
-    const isDarkFocusSection = slide.id === 'slide-problems' || slide.id === 'slide-8';
+    const isDarkFocusSection = slide.id === 'slide-problems' || slide.id === 'slide-8' || slide.id === 'slide-7';
     const pointGridClass = !hasImage
       ? `grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-12 ${
           slide.id === 'slide-problems' ? 'gap-y-[3.75rem]' : slide.id === 'slide-extras' ? 'gap-y-[4.5rem]' : 'gap-y-10'
@@ -725,6 +725,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                           <div className={`flex items-center gap-4 ${isBigRow ? 'justify-center' : ''}`}>
                             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Клиент</span>
                             <div className="h-px bg-accent/20 dark:bg-accent/40 flex-grow max-w-[100px]" />
+                            <ArrowRight className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-accent transition-colors shrink-0" />
                           </div>
 
                           <h3
@@ -964,16 +965,17 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             : slide.id === 'slide-problems'
               ? 'slide-height pt-20 pb-12 md:pt-24 md:pb-16'
               : 'slide-height py-20 md:py-24'
-      }`}
-      style={
+      } ${
         slide.id === 'slide-problems'
-          ? { backgroundColor: '#FEFDFD' }
+          ? 'bg-[#FEFDFD] dark:bg-[#0A0D12]'
           : slide.id === 'slide-12'
-            ? { backgroundColor: '#FDFCFE' }
+            ? 'bg-[#FDFCFE] dark:bg-[#0B0E14]'
             : slide.id === 'slide-8'
-              ? { backgroundColor: '#FDFDFD' }
-              : undefined
-      }
+              ? 'bg-[#FDFDFD] dark:bg-[#0A0D13]'
+              : slide.id === 'slide-7'
+                ? 'bg-transparent dark:bg-[#090C12]'
+                : ''
+      }`}
     >
       <div className="flex-grow container-wide text-brand dark:text-white">{renderContent()}</div>
     </motion.section>
