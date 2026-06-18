@@ -4,6 +4,7 @@ import dsc from '../assets/images/dsc.jpg';
 import fns from '../assets/images/fns.jpg';
 import fox from '../assets/images/fox.jpg';
 import future from '../assets/images/future.png';
+import heroNew from '../assets/images/hero new.png';
 import komanda from '../assets/images/komanda.png';
 import leads from '../assets/images/leads.png';
 import moy from '../assets/images/moy.png';
@@ -30,6 +31,7 @@ const importedAssetMap: Record<string, string> = {
   '/src/assets/images/fns.jpg': fns,
   '/src/assets/images/fox.jpg': fox,
   '/src/assets/images/future.png': future,
+  '/src/assets/images/hero new.png': heroNew,
   '/src/assets/images/komanda.png': komanda,
   '/src/assets/images/leads.png': leads,
   '/src/assets/images/moy.png': moy,

@@ -295,6 +295,7 @@ const buildCasePreview = (item: any) => ({
 export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   const [selectedCase, setSelectedCase] = React.useState<ModalCaseData | null>(null);
   const [openTooltipId, setOpenTooltipId] = React.useState<string | null>(null);
+  const isLightLockedHero = slide.id === 'slide-1';
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -333,26 +334,26 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 glass-card rounded-full mb-8">
             <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 dark:text-gray-300">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
               {slide.data?.eyebrow}
             </span>
           </div>
           <motion.p
             variants={itemVariants}
-            className="text-4xl md:text-6xl font-display font-medium leading-[0.9] mb-8 tracking-tightest text-brand/40 dark:text-white/40"
+            className="text-3xl md:text-[2.625rem] font-display font-medium leading-[0.9] mb-8 tracking-tightest text-brand/40"
           >
             {slide.data?.brand}
           </motion.p>
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-[4.5rem] font-display font-medium leading-[0.95] mb-8 tracking-tightest text-brand dark:text-white max-w-5xl"
+            className="text-4xl md:text-[3.625rem] font-display font-medium leading-[0.95] mb-8 tracking-tightest text-brand max-w-5xl"
           >
             {slide.title}
           </motion.h1>
         </motion.div>
 
         <motion.div variants={itemVariants} className="max-w-2xl">
-          <p className="text-lg md:text-xl leading-relaxed text-gray-500 dark:text-gray-400 font-normal">
+          <p className="text-lg md:text-xl leading-relaxed text-gray-500 font-normal">
             {slide.description}
           </p>
 
@@ -372,7 +373,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       {slide.data?.image && (
         <motion.div
           variants={itemVariants}
-          className="relative w-full rounded-3xl md:rounded-[4rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 flex justify-center lg:justify-end"
+          className="relative w-full rounded-3xl md:rounded-[4rem] overflow-hidden transition-all duration-1000 flex justify-center lg:justify-end"
         >
           <img
             src={resolveAssetPath(slide.data.image)}
@@ -397,9 +398,9 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="liquid-glass absolute left-0 bottom-full mb-4 z-[120] w-[min(22rem,calc(100vw-3rem))] rounded-[1.75rem] p-5"
+            className="liquid-glass absolute left-0 bottom-full mb-4 z-[140] w-[min(22rem,calc(100vw-3rem))] rounded-[1.75rem] p-5"
           >
-            <div className="absolute inset-0 rounded-[1.75rem] bg-gradient-to-br from-white/60 via-white/10 to-blue-100/30 dark:from-white/10 dark:via-white/5 dark:to-blue-400/10 pointer-events-none" />
+            <div className="absolute inset-0 rounded-[1.75rem] bg-white dark:bg-[#0E1520] pointer-events-none" />
             <div className="relative">
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent mb-3">{title}</p>
               <p className="text-sm md:text-[15px] leading-relaxed text-gray-700 dark:text-gray-100">{text}</p>
@@ -883,7 +884,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   };
 
   const renderCta = () => (
-    <div className="flex flex-col h-full justify-center">
+    <div className="flex flex-col">
       <motion.h2
         variants={itemVariants}
         className="text-4xl md:text-6xl font-display font-medium mb-16 tracking-tightest leading-[0.9]"
@@ -1045,13 +1046,13 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       variants={containerVariants}
       className={`relative snap-start px-8 md:px-12 lg:px-20 flex flex-col overflow-visible ${
         slide.id === 'slide-1'
-          ? 'min-h-[70vh] min-h-[70svh] pt-[140px] pb-8 md:pb-10'
+          ? 'min-h-[70vh] min-h-[70svh] pt-[140px] pb-8 md:pb-10 bg-white'
           : slide.id === 'slide-13'
-            ? 'slide-height pt-6 pb-3 md:pt-6 md:pb-3'
+            ? 'pt-6 pb-[120px] md:pt-6 md:pb-[120px]'
             : slide.type === 'conversion'
-              ? 'slide-height py-10 md:py-14'
+              ? 'py-3 md:py-4'
             : slide.id === 'slide-problems'
-              ? 'slide-height pt-20 pb-12 md:pt-24 md:pb-16'
+              ? 'slide-height pt-20 pb-6 md:pt-24 md:pb-8'
               : 'slide-height py-20 md:py-24'
       } ${
         slide.id === 'slide-problems'
@@ -1069,7 +1070,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                 : ''
       }`}
     >
-      <div className="flex-grow container-wide text-brand dark:text-white">{renderContent()}</div>
+      <div className={`flex-grow container-wide ${isLightLockedHero ? 'text-brand' : 'text-brand dark:text-white'}`}>{renderContent()}</div>
     </motion.section>
   );
 };

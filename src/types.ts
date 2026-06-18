@@ -828,7 +828,7 @@ export const SLIDES: SlideContent[] = [
         'Личные кабинеты и B2B-платформы',
         'MVP и запуск новых продуктов'
       ],
-      image: '/hero-one.png',
+      image: '/src/assets/images/hero new.png',
       secondaryCta: { label: 'Посмотреть кейсы', targetId: 'slide-11' }
     }
   },
