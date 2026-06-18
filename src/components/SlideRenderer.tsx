@@ -778,7 +778,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   };
 
   const renderManifest = () => (
-    <div className="flex flex-col h-full justify-center">
+    <div className="flex flex-col h-full justify-start md:justify-center">
       <motion.div variants={itemVariants} className="max-w-none">
         <span className="text-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-12 block">Why us</span>
         <h2 className="text-3xl md:text-6xl font-display font-medium leading-[0.95] tracking-tightest text-brand dark:text-white mb-14 md:mb-20">
@@ -1081,6 +1081,8 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             ? 'pt-3 pb-[120px] md:pt-6 md:pb-[120px]'
             : slide.type === 'conversion'
               ? 'py-2 md:py-4'
+            : slide.id === 'slide-why'
+              ? 'py-8 md:slide-height md:py-24'
             : slide.id === 'slide-problems'
               ? 'slide-height pt-10 pb-3 md:pt-24 md:pb-8'
               : 'slide-height py-10 md:py-24'
