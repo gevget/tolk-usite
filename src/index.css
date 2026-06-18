@@ -45,11 +45,12 @@
     left: 0;
     width: 200%;
     height: 200%;
-    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    background-image: url("/assets/noise.svg");
     opacity: 0.05;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 1;
     animation: grain 8s steps(10) infinite;
+    will-change: transform;
   }
 
   .dark .grain-overlay {
@@ -80,6 +81,7 @@
                 radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.05) 0%, transparent 40%),
                 radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
     animation: pulse-bg 15s ease-in-out infinite alternate;
+    will-change: transform;
   }
 
   @keyframes pulse-bg {
@@ -89,16 +91,16 @@
 
   /* Glassmorphism */
   .glass-card {
-    @apply bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10;
+    @apply bg-white/78 dark:bg-white/6 backdrop-blur-lg border border-gray-200/60 dark:border-white/10;
     box-shadow:
-      0 16px 40px rgba(15, 23, 42, 0.08),
+      0 14px 34px rgba(15, 23, 42, 0.07),
       inset 0 1px 0 rgba(255, 255, 255, 0.75);
   }
 
   .glass-nav {
-    @apply bg-white/60 dark:bg-black/40 backdrop-blur-2xl border-b border-gray-200/50 dark:border-white/5;
+    @apply bg-white/72 dark:bg-black/46 backdrop-blur-xl border-b border-gray-200/60 dark:border-white/5;
     box-shadow:
-      0 10px 28px rgba(15, 23, 42, 0.06),
+      0 8px 22px rgba(15, 23, 42, 0.05),
       inset 0 1px 0 rgba(255, 255, 255, 0.65);
   }
 
@@ -109,13 +111,13 @@
       linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(247, 250, 255, 1)),
       radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 52%);
     background-color: rgb(255, 255, 255);
-    backdrop-filter: blur(72px) saturate(230%);
-    -webkit-backdrop-filter: blur(72px) saturate(230%);
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
     border: 1px solid rgb(203, 213, 225);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.9),
       inset 0 -1px 0 rgba(255, 255, 255, 0.35),
-      0 18px 42px rgba(148, 163, 184, 0.14);
+      0 14px 32px rgba(148, 163, 184, 0.12);
   }
 
   .dark .liquid-glass {
@@ -127,7 +129,7 @@
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.16),
       inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-      0 18px 42px rgba(2, 6, 23, 0.32);
+      0 14px 32px rgba(2, 6, 23, 0.28);
   }
 
   /* Custom Scrollbar */
@@ -147,6 +149,11 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tightest;
   }
+
+  :focus-visible {
+    outline: 2px solid rgba(59, 130, 246, 0.9);
+    outline-offset: 3px;
+  }
 }
 
 .slide-height {
@@ -159,4 +166,44 @@
   max-width: var(--max-width-xl);
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 767px) {
+  .grain-overlay {
+    animation: none;
+    opacity: 0.03;
+  }
+
+  .flowing-bg {
+    animation: none;
+    background:
+      radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.04) 0%, transparent 42%),
+      radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.03) 0%, transparent 34%);
+  }
+
+  .glass-card,
+  .glass-nav,
+  .liquid-glass {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .slide-height {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

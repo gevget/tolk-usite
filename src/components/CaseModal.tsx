@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, AlertCircle, Zap, Sparkles, Target, ArrowLeft, ArrowRight } from 'lucide-react';
 import { DynamicIcon } from './SlideRenderer';
-import { resolveAssetPath } from '../utils/resolveAssetPath';
+import { getAssetDimensions, resolveAssetPath } from '../utils/resolveAssetPath';
 
 interface CaseModalProps {
   isOpen: boolean;
@@ -25,6 +25,7 @@ interface CaseModalProps {
 
 export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData }) => {
   const [activeImageIdx, setActiveImageIdx] = React.useState(0);
+  const closeButtonRef = React.useRef<HTMLButtonElement | null>(null);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -44,6 +45,21 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
     }
   }, [isOpen, caseData]);
 
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    closeButtonRef.current?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, onClose]);
+
   if (!caseData) return null;
 
   const gallery = caseData.fullContent.gallery || [caseData.image];
@@ -62,7 +78,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
     <AnimatePresence>
       {isOpen && (
         <div
-          className="fixed inset-0 z-[100] overflow-y-auto overflow-x-hidden scroll-smooth custom-scrollbar bg-black/50 backdrop-blur-md"
+          className="fixed inset-0 z-[100] overflow-y-auto overflow-x-hidden scroll-smooth custom-scrollbar bg-black/50 backdrop-blur-sm"
           style={{ perspective: '2000px' }}
           onClick={onClose}
         >
@@ -73,13 +89,16 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
               exit={{ opacity: 0, y: 100, rotateX: 15, scale: 0.95 }}
               transition={{
                 type: 'spring',
-                damping: 25,
-                stiffness: 120,
+                damping: 30,
+                stiffness: 110,
                 opacity: { duration: 0.4 },
               }}
               style={{ transformOrigin: 'top center' }}
-              className="relative w-full max-w-[1620px] bg-white dark:bg-[#050505] md:rounded-[3rem] overflow-hidden flex flex-col my-auto"
+              className="relative w-full max-w-[1620px] bg-white dark:bg-[#050505] rounded-none md:rounded-[3rem] overflow-hidden flex flex-col my-auto"
               onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="case-modal-title"
             >
               <div className="relative w-full bg-white dark:bg-[#050505] group overflow-hidden shrink-0">
                 <AnimatePresence mode="wait">
@@ -92,6 +111,8 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     className="block w-full h-auto"
+                    width={getAssetDimensions(gallery[activeImageIdx])?.width}
+                    height={getAssetDimensions(gallery[activeImageIdx])?.height}
                     loading="eager"
                     decoding="async"
                   />
@@ -101,33 +122,34 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                   <>
                     <button
                       onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/40"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-black/28 backdrop-blur-sm text-white border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                       aria-label="Предыдущее изображение"
                     >
-                      <ArrowLeft className="w-6 h-6" />
+                      <ArrowLeft className="w-6 h-6" aria-hidden="true" focusable="false" />
                     </button>
                     <button
                       onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/40"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 p-4 rounded-full bg-black/28 backdrop-blur-sm text-white border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                       aria-label="Следующее изображение"
                     >
-                      <ArrowRight className="w-6 h-6" />
+                      <ArrowRight className="w-6 h-6" aria-hidden="true" focusable="false" />
                     </button>
                   </>
                 )}
 
                 <button
+                  ref={closeButtonRef}
                   onClick={onClose}
-                  className="absolute top-6 right-6 p-4 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-accent transition-colors z-20 border border-white/10"
+                  className="absolute top-4 right-4 md:top-6 md:right-6 p-3 md:p-4 rounded-full bg-black/40 backdrop-blur-sm text-white hover:bg-accent transition-colors z-20 border border-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   aria-label="Закрыть модальное окно"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6" aria-hidden="true" focusable="false" />
                 </button>
               </div>
 
               <div className="bg-white dark:bg-[#050505]">
                 {gallery.length > 1 && (
-                  <div className="px-6 md:px-12 py-6 flex gap-3 overflow-x-auto no-scrollbar border-b border-gray-100 dark:border-white/5 sticky top-0 bg-white/80 dark:bg-[#050505]/80 backdrop-blur-xl z-20">
+                  <div className="px-4 md:px-12 py-4 md:py-6 flex gap-3 overflow-x-auto no-scrollbar border-b border-gray-100 dark:border-white/5 sticky top-0 bg-white/92 dark:bg-[#050505]/92 backdrop-blur-md z-20">
                     {gallery.map((img, idx) => (
                       <button
                         key={idx}
@@ -136,15 +158,23 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                           activeImageIdx === idx ? 'ring-2 ring-accent scale-95' : 'opacity-40 hover:opacity-100'
                         }`}
                       >
-                        <img src={resolveAssetPath(img)} className="w-full h-full object-cover" alt="" />
+                        <img
+                          src={resolveAssetPath(img)}
+                          className="w-full h-full object-cover"
+                          alt=""
+                          width={getAssetDimensions(img)?.width}
+                          height={getAssetDimensions(img)?.height}
+                          loading="lazy"
+                          decoding="async"
+                        />
                       </button>
                     ))}
                   </div>
                 )}
 
-                <div className="p-8 md:p-16 max-w-[1400px] mx-auto">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24">
-                    <div className="lg:col-span-8 space-y-20">
+                <div className="p-5 md:p-16 max-w-[1400px] mx-auto">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-24">
+                    <div className="lg:col-span-8 space-y-12 md:space-y-20">
                       <section>
                         <motion.span
                           initial={{ opacity: 0, y: 10 }}
@@ -156,6 +186,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                         <motion.h2
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
+                          id="case-modal-title"
                           className="text-brand dark:text-white text-3xl md:text-5xl lg:text-6xl font-display font-medium tracking-tightest leading-[1.05] mb-6"
                         >
                           {caseData.fullContent.title}
@@ -168,10 +199,10 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                         </p>
                       </section>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
                         <section>
                           <h4 className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-red-500/60 mb-8 font-mono">
-                            <AlertCircle className="w-4 h-4" /> Проблемы
+                            <AlertCircle className="w-4 h-4" aria-hidden="true" focusable="false" /> Проблемы
                           </h4>
                           <div className="space-y-8">
                             {caseData.fullContent.problem.map((p, i) => (
@@ -189,7 +220,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
 
                         <section>
                           <h4 className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-accent mb-8 font-mono">
-                            <Zap className="w-4 h-4" /> Решение
+                            <Zap className="w-4 h-4" aria-hidden="true" focusable="false" /> Решение
                           </h4>
                           <div className="space-y-8">
                             {caseData.fullContent.solution.map((s, i) => (
@@ -207,23 +238,23 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                       </div>
                     </div>
 
-                    <div className="lg:col-span-4 space-y-12">
+                    <div className="lg:col-span-4 space-y-8 md:space-y-12">
                       <motion.div
                         whileHover={{ y: -5, scale: 1.02 }}
-                        className="p-8 md:p-10 glass-card rounded-[2.5rem] border-brand/10 dark:border-white/10 relative overflow-hidden group/feat"
+                        className="p-5 md:p-10 glass-card rounded-[1.5rem] md:rounded-[2.5rem] border-brand/10 dark:border-white/10 relative overflow-hidden group/feat"
                       >
-                        <Sparkles className="absolute -top-4 -right-4 w-24 h-24 text-accent/5 rotate-12 group-hover/feat:text-accent/10 transition-colors" />
+                        <Sparkles className="absolute -top-4 -right-4 w-24 h-24 text-accent/5 rotate-12 group-hover/feat:text-accent/10 transition-colors" aria-hidden="true" focusable="false" />
                         <h4 className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-8 font-mono">
-                          <Sparkles className="w-3.5 h-3.5" /> Ключевая фича
+                          <Sparkles className="w-3.5 h-3.5" aria-hidden="true" focusable="false" /> Ключевая фича
                         </h4>
                         <p className="text-brand dark:text-white text-xl md:text-2xl font-display font-medium leading-relaxed italic z-10 relative">
                           «{caseData.fullContent.keyFeature}»
                         </p>
                       </motion.div>
 
-                      <div className="p-8 md:p-10 glass-card rounded-[2.5rem] bg-gray-50/50 dark:bg-white/5">
+                      <div className="p-5 md:p-10 glass-card rounded-[1.5rem] md:rounded-[2.5rem] bg-gray-50/50 dark:bg-white/5">
                         <h4 className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-8 font-mono">
-                          <Target className="w-3.5 h-3.5" /> Результат
+                          <Target className="w-3.5 h-3.5" aria-hidden="true" focusable="false" /> Результат
                         </h4>
                         <div className="space-y-4">
                           {caseData.fullContent.results.map((r, i) => (
