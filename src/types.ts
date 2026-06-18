@@ -6,7 +6,7 @@ export interface SlideContent {
   points?: (string | { text: string; icon: string; tooltip?: string; shortLabel?: string; description?: string })[];
   footer?: string;
   image?: string;
-  type: 'hero' | 'dual' | 'list' | 'grid' | 'team' | 'clients' | 'cases' | 'cta' | 'manifest' | 'activities' | 'products';
+  type: 'hero' | 'dual' | 'list' | 'grid' | 'team' | 'clients' | 'cases' | 'cta' | 'manifest' | 'activities' | 'products' | 'conversion';
   data?: any;
   customStyles?: {
     title?: any;
@@ -242,7 +242,7 @@ const LEGACY_SLIDES: SlideContent[] = [
       }
     ],
     footer: '12+ лет опыта • 400+ проектов • От идеи — до работающей системы',
-    image: '/src/assets/images/team_founders_vibe_1781610078621.jpg',
+    image: '/src/assets/images/komanda.png',
     customStyles: {
       footer: { fontSize: '48px' }
     }
@@ -265,15 +265,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'ФНС / Мой налог',
         task: 'Escrow-механизм безопасной сделки: система расчётов между покупателем и самозанятым.',
-        image: '/src/assets/images/case_payment_vibe_1781608019099.jpg',
+        image: '/src/assets/images/fns.jpg',
         fullContent: {
           title: '(ФНС) Безопасная сделка',
           subtitle: 'Escrow-механизм для самозанятых в приложении «Мой налог»',
-          gallery: [
-            '/src/assets/images/case_payment_vibe_1781608019099.jpg',
-            '/src/assets/images/case_city_infrastructure_1781608005789.jpg',
-            '/src/assets/images/audit_roadmap_abstract_1781607496541.jpg'
-          ],
+          gallery: ['/src/assets/images/fns.jpg'],
           problem: [
             { text: 'Страх предоплаты у клиентов', icon: 'ShieldAlert' },
             { text: 'Риск неоплаты у исполнителей', icon: 'UserX' },
@@ -295,15 +291,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'Яндекс Support AI',
         task: 'Интеллектуальная поддержка: кастомный AI-виджет с глубокой настройкой интерфейса и логики.',
-        image: '/src/assets/images/audit_roadmap_abstract_1781607496541.jpg',
+        image: '/src/assets/images/yandex.jpg',
         fullContent: {
           title: 'Yandex Support AI',
           subtitle: 'AI-система поддержки + полностью кастомизируемый виджет',
-          gallery: [
-            '/src/assets/images/audit_roadmap_abstract_1781607496541.jpg',
-            '/src/assets/images/ai_intelligence_abstract_1781610109003.jpg',
-            '/src/assets/images/case_messenger_ui_1781607960558.jpg'
-          ],
+          gallery: ['/src/assets/images/yandex.jpg'],
           problem: [
             { text: 'Стандартные виджеты ломают UX', icon: 'Layout' },
             { text: 'Нельзя адаптировать под продукт', icon: 'UserCog' },
@@ -324,15 +316,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'Döcke (DSC)',
         task: 'B2B-платформа закупок: перевод процессов из звонков и ручных заказов в цифровую систему.',
-        image: '/src/assets/images/case_city_infrastructure_1781608005789.jpg',
+        image: '/src/assets/images/dsc.jpg',
         fullContent: {
           title: 'DSC (Docke Supply Center)',
           subtitle: 'B2B-платформа закупок строительных материалов',
-          gallery: [
-            '/src/assets/images/case_city_infrastructure_1781608005789.jpg',
-            '/src/assets/images/case_logistics_viz_1781607975934.jpg',
-            '/src/assets/images/systems_architecture_art_1781610094808.jpg'
-          ],
+          gallery: ['/src/assets/images/dsc.jpg'],
           problem: [
             { text: 'Заказы через менеджеров', icon: 'Users' },
             { text: 'Ошибки в номенклатуре', icon: 'FileX' },
@@ -353,15 +341,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'STOLKOM',
         task: 'AI Bot Platform: единая операционная система для продаж, поддержки и маркетинга.',
-        image: '/src/assets/images/case_messenger_ui_1781607960558.jpg',
+        image: '/src/assets/images/stolkom.jpg',
         fullContent: {
           title: 'STOLKOM (AI Bot Platform)',
           subtitle: 'Платформа автоматизации коммуникации с клиентами',
-          gallery: [
-            '/src/assets/images/case_messenger_ui_1781607960558.jpg',
-            '/src/assets/images/ai_intelligence_abstract_1781610109003.jpg',
-            '/src/assets/images/audit_roadmap_abstract_1781607496541.jpg'
-          ],
+          gallery: ['/src/assets/images/stolkom.jpg'],
           problem: [
             { text: 'Разрозненные каналы общения', icon: 'MessageSquareOff' },
             { text: 'Ручная работа операторов', icon: 'HandMetal' },
@@ -382,15 +366,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'SIMB-AD',
         task: 'Ad Management: end-to-end платформа управления digital-рекламой и финансами.',
-        image: '/src/assets/images/case_logistics_viz_1781607975934.jpg',
+        image: '/src/assets/images/simb.jpg',
         fullContent: {
           title: 'SIMB-AD',
           subtitle: 'Платформа управления digital-рекламой',
-          gallery: [
-            '/src/assets/images/case_logistics_viz_1781607975934.jpg',
-            '/src/assets/images/case_payment_vibe_1781608019099.jpg',
-            '/src/assets/images/case_messenger_ui_1781607960558.jpg'
-          ],
+          gallery: ['/src/assets/images/simb.jpg'],
           problem: [
             { text: 'Медиапланы в Excel', icon: 'FileSpreadsheet' },
             { text: 'Согласования в чатах', icon: 'MessageCircle' },
@@ -412,15 +392,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'BusinessFOX',
         task: 'EdTech экосистема: объединение обучения, CRM, ERP и франшизы в одном контуре.',
-        image: '/src/assets/images/case_social_platform_1781607990589.jpg',
+        image: '/src/assets/images/fox.jpg',
         fullContent: {
           title: 'BusinessFOX',
           subtitle: 'EdTech-платформа: обучение + CRM + ERP + франшиза',
-          gallery: [
-            '/src/assets/images/case_social_platform_1781607990589.jpg',
-            '/src/assets/images/case_messenger_ui_1781607960558.jpg',
-            '/src/assets/images/audit_roadmap_abstract_1781607496541.jpg'
-          ],
+          gallery: ['/src/assets/images/fox.jpg'],
           problem: [
             { text: 'Нет сформированного продукта на старте', icon: 'PackageX' },
             { text: 'Нет IT-системы', icon: 'XCircle' },
@@ -441,15 +417,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'ProNetwork',
         task: 'Операционная система бизнеса внутри Telegram: коммуникация, реклама, лиды.',
-        image: '/src/assets/images/case_messenger_ui_1781607960558.jpg',
+        image: '/src/assets/images/pronet.png',
         fullContent: {
           title: 'ProNetwork',
           subtitle: 'Операционная система бизнеса внутри Telegram',
-          gallery: [
-            '/src/assets/images/case_messenger_ui_1781607960558.jpg',
-            '/src/assets/images/case_logistics_viz_1781607975934.jpg',
-            '/src/assets/images/ai_intelligence_abstract_1781610109003.jpg'
-          ],
+          gallery: ['/src/assets/images/pronet.png'],
           problem: [
             { text: 'Переписки теряются', icon: 'MessageCircleOff' },
             { text: 'Нет фиксации договоренностей', icon: 'FileX' },
@@ -470,15 +442,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'Catalon',
         task: 'Платформа управления логистикой: автоматизация цикла грузоперевозок через операторов.',
-        image: '/src/assets/images/product_logistics_platform_1781611535239.jpg',
+        image: '/src/assets/images/catalon.png',
         fullContent: {
           title: 'Catalon',
           subtitle: 'Платформа управления грузоперевозок с «управляемой сделкой»',
-          gallery: [
-            '/src/assets/images/product_logistics_platform_1781611535239.jpg',
-            '/src/assets/images/case_logistics_viz_1781607975934.jpg',
-            '/src/assets/images/case_payment_vibe_1781608019099.jpg'
-          ],
+          gallery: ['/src/assets/images/catalon.png'],
           problem: [
             { text: 'Перегруз операторов', icon: 'UserMinus' },
             { text: 'Ручное распределение заявок', icon: 'HandMetal' },
@@ -499,15 +467,11 @@ const LEGACY_SLIDES: SlideContent[] = [
       {
         client: 'Нижегородский водоканал',
         task: 'Городская цифровая платформа: передача показаний, управление услугами и ЛК.',
-        image: '/src/assets/images/case_city_infrastructure_1781608005789.jpg',
+        image: '/src/assets/images/vod.png',
         fullContent: {
           title: 'Нижегородский водоканал',
           subtitle: 'Цифровая платформа для жителей и бизнеса',
-          gallery: [
-            '/src/assets/images/case_city_infrastructure_1781608005789.jpg',
-            '/src/assets/images/case_payment_vibe_1781608019099.jpg',
-            '/src/assets/images/case_logistics_viz_1781607975934.jpg'
-          ],
+          gallery: ['/src/assets/images/vod.png'],
           problem: [
             { text: 'Ручная передача показаний', icon: 'HandMetal' },
             { text: 'Перегруз колл-центров', icon: 'PhoneOff' },
@@ -523,6 +487,81 @@ const LEGACY_SLIDES: SlideContent[] = [
           ],
           keyFeature: 'Полная замена оффлайн-процессов на цифровые. Пользователь решает всё без посещения офиса.',
           results: ['↓ Нагрузка на колл-центр', '↓ Очереди и ошибки', '↑ Удобство для пользователей', '↑ Прозрачность процессов']
+        }
+      },
+      {
+        client: 'Leads.Work',
+        task: 'Платформа работы с лидами: единый контур для захвата, распределения, обработки и аналитики обращений.',
+        image: '/src/assets/images/leads.png',
+        fullContent: {
+          title: 'Leads.Work',
+          subtitle: 'Система управления лидами и скоростью обработки заявок',
+          gallery: ['/src/assets/images/leads.png'],
+          problem: [
+            { text: 'Лиды приходят из разных каналов и теряются', icon: 'Inbox' },
+            { text: 'Нет прозрачности по статусам и ответственным', icon: 'EyeOff' },
+            { text: 'Ручное распределение тормозит продажи', icon: 'TimerReset' },
+            { text: 'Сложно понять реальную конверсию по этапам', icon: 'BarChart3' }
+          ],
+          solution: [
+            { text: 'Единая воронка для всех входящих обращений', icon: 'Workflow' },
+            { text: 'Маршрутизация лидов по правилам и ролям', icon: 'GitBranch' },
+            { text: 'Рабочие кабинеты для sales-команды и руководителей', icon: 'Users' },
+            { text: 'Дашборды по скорости реакции, источникам и конверсии', icon: 'LayoutDashboard' },
+            { text: 'Интеграции с CRM, формами и рекламными каналами', icon: 'Link' }
+          ],
+          keyFeature: 'Лид не просто фиксируется, а сразу попадает в управляемый процесс: кто взял, что сделал и где теряется конверсия.',
+          results: ['↑ Скорость обработки заявок', '↑ Контроль по воронке', '↓ Потери лидов', '↑ Конверсия в сделки']
+        }
+      },
+      {
+        client: 'Сетка данных',
+        task: 'Внутренняя data-платформа: объединение разрозненных источников, ролей и отчётности в один понятный рабочий слой.',
+        image: '/src/assets/images/setka.png',
+        fullContent: {
+          title: 'Сетка данных',
+          subtitle: 'Единый слой данных для принятия решений и операционной работы',
+          gallery: ['/src/assets/images/setka.png'],
+          problem: [
+            { text: 'Данные разбросаны по таблицам, кабинетам и сервисам', icon: 'DatabaseZap' },
+            { text: 'Отчётность собирается вручную и устаревает', icon: 'FileSpreadsheet' },
+            { text: 'У команд разные версии одной и той же метрики', icon: 'Split' },
+            { text: 'Нет удобного слоя для ежедневной работы', icon: 'Blocks' }
+          ],
+          solution: [
+            { text: 'Собрали единый data-слой и понятную структуру сущностей', icon: 'Network' },
+            { text: 'Настроили роли, доступы и сценарии использования', icon: 'ShieldCheck' },
+            { text: 'Вывели ключевые показатели и рабочие дашборды', icon: 'LineChart' },
+            { text: 'Связали аналитику, процессы и пользовательские интерфейсы', icon: 'Waypoints' },
+            { text: 'Подготовили основу для автоматизации и AI-надстроек', icon: 'Sparkles' }
+          ],
+          keyFeature: 'Данные перестают жить отдельно от бизнеса и становятся частью ежедневных решений, процессов и интерфейсов команды.',
+          results: ['↑ Доверие к данным', '↑ Скорость управленческих решений', '↓ Ручная отчётность', '↑ Целостность процессов']
+        }
+      },
+      {
+        client: 'Мой район',
+        task: 'Городской сервис для жителей: цифровые сценарии взаимодействия, обращения, локальные сервисы и личный кабинет.',
+        image: '/src/assets/images/moy.png',
+        fullContent: {
+          title: 'Мой район',
+          subtitle: 'Цифровой сервис для жителей, локальных услуг и обращений',
+          gallery: ['/src/assets/images/moy.png'],
+          problem: [
+            { text: 'Жителям сложно быстро решать бытовые и районные вопросы', icon: 'MapPinned' },
+            { text: 'Сервисы и обращения разбросаны по разным каналам', icon: 'MessageSquareOff' },
+            { text: 'Нет единого личного кабинета и статусов заявок', icon: 'UserRoundX' },
+            { text: 'Команда не видит полную картину по обращениям', icon: 'SearchX' }
+          ],
+          solution: [
+            { text: 'Спроектировали единый вход в районные цифровые сервисы', icon: 'Compass' },
+            { text: 'Собрали обращения, услуги и уведомления в одном интерфейсе', icon: 'BellRing' },
+            { text: 'Добавили личный кабинет со статусами и историей действий', icon: 'NotebookTabs' },
+            { text: 'Настроили административный слой для обработки запросов', icon: 'BriefcaseBusiness' },
+            { text: 'Подготовили платформу к масштабированию на новые сценарии', icon: 'Expand' }
+          ],
+          keyFeature: 'Один районный интерфейс вместо набора разрозненных точек контакта: житель быстрее решает задачу, команда лучше управляет сервисом.',
+          results: ['↑ Удобство для жителей', '↑ Прозрачность обращений', '↓ Нагрузка на поддержку', '↑ Готовность к росту сервиса']
         }
       }
     ]
@@ -639,16 +678,12 @@ const LEGACY_SLIDES: SlideContent[] = [
       catalon: {
         name: 'Catalon',
         info: 'Цифровая экосистема для рынка грузоперевозок с «управляемой сделкой», а не просто биржей. Полный контроль логистических цепочек и финансовых потоков.',
-        image: '/src/assets/images/product_logistics_platform_1781611535239.jpg',
+        image: '/src/assets/images/catalon.png',
         icon: 'Truck',
         fullContent: {
           title: 'Catalon',
           subtitle: 'Платформа управления грузоперевозками с «управляемой сделкой»',
-          gallery: [
-            '/src/assets/images/product_logistics_platform_1781611535239.jpg',
-            '/src/assets/images/case_logistics_viz_1781607975934.jpg',
-            '/src/assets/images/case_payment_vibe_1781608019099.jpg'
-          ],
+          gallery: ['/src/assets/images/catalon.png'],
           problem: [
             { text: 'Перегруз операторов', icon: 'UserMinus' },
             { text: 'Ручное распределение заявок', icon: 'HandMetal' },
@@ -668,16 +703,12 @@ const LEGACY_SLIDES: SlideContent[] = [
       future: {
         name: 'Моё Будущее',
         info: 'ИИ-навигация склонностей школьников и кадровый прогноз для региона. Система профориентации нового поколения на базе алгоритмов машинного обучения.',
-        image: '/src/assets/images/product_education_ai_1781611553224.jpg',
+        image: '/src/assets/images/future.png',
         icon: 'GraduationCap',
         fullContent: {
           title: 'Моё Будущее',
           subtitle: 'AI-навигация склонностей школьников и кадровый прогноз',
-          gallery: [
-            '/src/assets/images/product_education_ai_1781611553224.jpg',
-            '/src/assets/images/ai_intelligence_abstract_1781610109003.jpg',
-            '/src/assets/images/case_social_platform_1781607990589.jpg'
-          ],
+          gallery: ['/src/assets/images/future.png'],
           problem: [
             { text: 'Сложно определить склонности и траекторию развития', icon: 'Compass' },
             { text: 'Нет целостной картины по кадровым дефицитам', icon: 'Users' },
@@ -695,16 +726,12 @@ const LEGACY_SLIDES: SlideContent[] = [
       smm: {
         name: 'SMM-база',
         info: 'Платформа для ведения соцсетей, отчётности и автопроцессов. Автоматизация постинга, анализа вовлечённости и управления комьюнити в одном окне.',
-        image: '/src/assets/images/product_smm_platform_1781611567495.jpg',
+        image: '/src/assets/images/smmbaza.png',
         icon: 'Share2',
         fullContent: {
           title: 'SMM-база',
           subtitle: 'Платформа для ведения соцсетей, отчётности и автопроцессов',
-          gallery: [
-            '/src/assets/images/product_smm_platform_1781611567495.jpg',
-            '/src/assets/images/case_messenger_ui_1781607960558.jpg',
-            '/src/assets/images/ai_intelligence_abstract_1781610109003.jpg'
-          ],
+          gallery: ['/src/assets/images/smmbaza.png'],
           problem: [
             { text: 'Ручное ведение контента и публикаций', icon: 'HandMetal' },
             { text: 'Сложно собирать отчётность и аналитику', icon: 'FileSpreadsheet' },
@@ -737,9 +764,9 @@ const LEGACY_SLIDES: SlideContent[] = [
     description: 'Нужен не просто подрядчик, а связка продукт + дизайн + разработка + AI — это к нам.',
     data: {
       contacts: [
-        { label: 'Telegram @gevget', value: 'https://t.me/gevget' },
-        { label: 'Telegram @mixayumatov', value: 'https://t.me/mixayumatov' },
-        { label: 'info@tolk-usite.ru', value: 'mailto:info@tolk-usite.ru' }
+        { label: 'Telegram', value: 'https://t.me/gevget' },
+        { label: 'WhatsApp', value: 'https://wa.me/79527733669' },
+        { label: 'Email', value: 'mailto:info@tolk-usite.ru' }
       ]
     },
     footer: 'Пришлите задачу — предложим варианты решения.',
@@ -760,16 +787,12 @@ if (!legacyCasesSlide || !legacyProductsSlide || !legacyTeamSlide) {
 const aiSystemsProduct = {
   name: 'AI Systems',
   info: 'Внутренние инструменты, AI-ассистенты и рабочие системы для поиска знаний, документов, поддержки команды и ускорения ежедневных процессов.',
-  image: '/ai-inside.png',
+  image: '/src/assets/images/ai.png',
   icon: 'Brain',
   fullContent: {
     title: 'AI Systems',
     subtitle: 'Внутренние AI-инструменты для поиска знаний, документов и поддержки команды',
-    gallery: [
-      '/ai-inside.png',
-      '/src/assets/images/ai_intelligence_abstract_1781610109003.jpg',
-      '/src/assets/images/audit_roadmap_abstract_1781607496541.jpg'
-    ],
+    gallery: ['/src/assets/images/ai.png'],
     problem: [
       { text: 'Сотрудники тонут в документах и сообщениях', icon: 'FileQuestion' },
       { text: 'Знания компании разбросаны по разным системам', icon: 'Search' },
@@ -799,10 +822,6 @@ export const SLIDES: SlideContent[] = [
     data: {
       brand: 'TOLK × USITE',
       eyebrow: 'Strategy × Product × AI × Delivery',
-      roles: [
-        'TOLK отвечает за стратегию, продукт и дизайн.',
-        'USITE — за разработку, AI и техническую реализацию.'
-      ],
       bullets: [
         'Сайты и цифровые продукты',
         'AI-ассистенты и внутренние системы',
@@ -810,7 +829,6 @@ export const SLIDES: SlideContent[] = [
         'MVP и запуск новых продуктов'
       ],
       image: '/hero-one.png',
-      primaryCta: { label: 'Обсудить проект', targetId: 'slide-13' },
       secondaryCta: { label: 'Посмотреть кейсы', targetId: 'slide-11' }
     }
   },
@@ -894,6 +912,23 @@ export const SLIDES: SlideContent[] = [
     ]
   },
   {
+    id: 'slide-conversion-start',
+    type: 'conversion',
+    title: 'Похоже на вашу ситуацию?',
+    description: 'Можно быстро понять, что делать первым. Разберём задачу, покажем 1–3 рабочих сценария и скажем, что имеет смысл запускать сейчас.',
+    points: [
+      'что запускать первым',
+      'что можно не делать сейчас',
+      'где AI и система реально дадут эффект'
+    ],
+    footer: 'Без тяжёлой стройки и длинной фазы «подумать ещё». Сразу переводим разговор в рабочий маршрут.',
+    data: {
+      variant: 'diagnostic',
+      eyebrow: 'Быстрый разбор',
+      primaryCta: { label: 'Обсудить задачу', targetId: 'slide-13' }
+    }
+  },
+  {
     id: 'slide-what',
     type: 'grid',
     title: 'Что мы делаем',
@@ -954,7 +989,29 @@ export const SLIDES: SlideContent[] = [
       { text: 'Гибко', icon: 'RefreshCw', description: 'Подстраиваем глубину работы под реальную стадию бизнеса: от sprint-сценария до полноценной продуктовой системы.' }
     ],
     data: {
-      founders: legacyTeamSlide.data,
+      founders: legacyTeamSlide.data
+        .map((member: any) => ({
+          ...member,
+          telegramLabel:
+            member.name === 'Михаил Юматов'
+              ? 'Михаил Юматов — Telegram @mixayumatov'
+              : member.name === 'Евгений Толченков'
+                ? 'Евгений Толченков — Telegram @gevget'
+                : undefined,
+          telegramUrl:
+            member.name === 'Михаил Юматов'
+              ? 'https://t.me/mixayumatov'
+              : member.name === 'Евгений Толченков'
+                ? 'https://t.me/gevget'
+                : undefined,
+        }))
+        .sort((a: any, b: any) => {
+          const order: Record<string, number> = {
+            'Евгений Толченков': 0,
+            'Михаил Юматов': 1,
+          };
+          return (order[a.name] ?? 99) - (order[b.name] ?? 99);
+        }),
       image: legacyTeamSlide.image,
       footer: legacyTeamSlide.footer
     }
@@ -964,6 +1021,23 @@ export const SLIDES: SlideContent[] = [
     type: 'cases',
     title: 'Кейсы',
     data: legacyCasesSlide.data
+  },
+  {
+    id: 'slide-conversion-proof',
+    type: 'conversion',
+    title: 'Есть похожая задача?',
+    description: 'Если у вас похожий контур задачи — сайт, кабинет, AI-инструмент или внутренняя система — покажем подход, сроки и маршрут запуска.',
+    points: [
+      'оценим задачу по реальному объёму',
+      'предложим формат: sprint, MVP или полноценную систему',
+      'соберём понятный roadmap'
+    ],
+    footer: 'После первого разговора у вас должен появиться не абстрактный «созвон», а понятное направление: что делаем, в каком формате и с каким эффектом.',
+    data: {
+      variant: 'trust',
+      eyebrow: 'После кейсов',
+      primaryCta: { label: 'Обсудить проект', targetId: 'slide-13' }
+    }
   },
   {
     id: 'slide-12',
@@ -1004,7 +1078,6 @@ export const SLIDES: SlideContent[] = [
     description: 'Расскажите, что нужно сделать.',
     footer: 'Предложим варианты решения, сроки и roadmap.',
     data: {
-      primaryCta: { label: 'Обсудить проект', targetId: 'slide-13' },
       contacts: [
         { label: 'Telegram', value: 'https://t.me/gevget' },
         { label: 'WhatsApp', value: 'https://wa.me/79527733669' },

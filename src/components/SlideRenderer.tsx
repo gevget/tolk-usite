@@ -213,12 +213,32 @@ export const DynamicIcon = ({ name, className }: { name: string; className?: str
   return <IconComponent className={className} />;
 };
 
-const ExpandableBio = ({ role, bio }: { role: string; bio?: string }) => {
+const ExpandableBio = ({
+  role,
+  bio,
+  telegramLabel,
+  telegramUrl,
+}: {
+  role: string;
+  bio?: string;
+  telegramLabel?: string;
+  telegramUrl?: string;
+}) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <div className="space-y-4">
       <p className="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed">{role}</p>
+      {telegramLabel && telegramUrl && (
+        <a
+          href={telegramUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center text-sm md:text-base text-accent hover:text-brand dark:hover:text-white transition-colors border-b border-accent/25 hover:border-brand dark:hover:border-white w-fit"
+        >
+          {telegramLabel}
+        </a>
+      )}
       {bio && (
         <div className="space-y-4">
           <button
@@ -303,7 +323,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   };
 
   const renderHero = () => (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 h-full items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 h-full items-start">
       <div className="flex flex-col justify-start">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -325,7 +345,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
           </motion.p>
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-[5.4rem] font-display font-medium leading-[0.95] mb-8 tracking-tightest text-brand dark:text-white max-w-5xl"
+            className="text-4xl md:text-[4.5rem] font-display font-medium leading-[0.95] mb-8 tracking-tightest text-brand dark:text-white max-w-5xl"
           >
             {slide.title}
           </motion.h1>
@@ -336,40 +356,12 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             {slide.description}
           </p>
 
-          <div className="mt-8 space-y-3">
-            {slide.data?.roles?.map((role: string) => (
-              <p key={role} className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-200">
-                {role}
-              </p>
-            ))}
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {slide.data?.bullets?.map((bullet: string) => (
-              <div
-                key={bullet}
-                className="liquid-glass flex items-start gap-3 rounded-2xl px-4 py-4"
-              >
-                <Check className="w-4 h-4 text-accent mt-1 shrink-0" />
-                <span className="text-sm md:text-base leading-relaxed text-gray-700 dark:text-gray-200">{bullet}</span>
-              </div>
-            ))}
-          </div>
-
-          <motion.div variants={itemVariants} className="mt-12 flex flex-wrap gap-4">
-            <button
-              onClick={() =>
-                document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })
-              }
-              className="px-8 py-4 bg-brand dark:bg-white text-white dark:text-black rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all shadow-xl hover:shadow-accent/20 active:scale-95"
-            >
-              {slide.data?.primaryCta?.label}
-            </button>
+          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap gap-4">
             <button
               onClick={() =>
                 document.getElementById(slide.data?.secondaryCta?.targetId || 'slide-11')?.scrollIntoView({ behavior: 'smooth' })
               }
-              className="px-8 py-4 glass-card rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-brand hover:text-white dark:hover:bg-white dark:hover:text-black transition-all active:scale-95"
+              className="px-8 py-4 rounded-2xl bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-accent hover:text-white transition-all active:scale-95 shadow-xl shadow-black/10 hover:shadow-accent/20"
             >
               {slide.data?.secondaryCta?.label}
             </button>
@@ -380,12 +372,12 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       {slide.data?.image && (
         <motion.div
           variants={itemVariants}
-          className="relative w-full rounded-3xl md:rounded-[4rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000"
+          className="relative w-full rounded-3xl md:rounded-[4rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 flex justify-center lg:justify-end"
         >
           <img
             src={resolveAssetPath(slide.data.image)}
             alt="Hero"
-            className="block w-full h-auto object-contain transition-transform duration-[2s]"
+            className="block w-full max-w-[700px] h-auto aspect-square object-contain transition-transform duration-[2s]"
             referrerPolicy="no-referrer"
           />
         </motion.div>
@@ -672,6 +664,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       ['ФНС / Мой налог', 'Яндекс Support AI'],
       ['Döcke (DSC)', 'STOLKOM', 'SIMB-AD'],
       ['BusinessFOX', 'ProNetwork', 'Нижегородский водоканал'],
+      ['Leads.Work', 'Сетка данных', 'Мой район'],
     ];
     const rows = rowKeys
       .map((row) => row.map((key) => caseMap.get(key)).filter(Boolean))
@@ -709,7 +702,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                         onKeyDown={(e) => e.key === 'Enter' && setSelectedCase(item)}
                       >
                         {item.image && (
-                          <div className="aspect-[4/3] mb-8 rounded-2xl md:rounded-[2rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 bg-gray-50 dark:bg-white/5 flex items-center justify-center">
+                          <div className="aspect-[4/3] mb-8 rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-700 bg-gray-50 dark:bg-white/5 flex items-center justify-center">
                             <img
                               src={resolveAssetPath(item.image)}
                               alt={item.client}
@@ -794,7 +787,12 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                     <h4 className="text-3xl md:text-4xl font-display font-medium text-brand dark:text-white mb-4 leading-tight group-hover:translate-x-2 transition-transform tracking-tightest">
                       {member.name}
                     </h4>
-                    <ExpandableBio role={member.role} bio={member.bio} />
+                    <ExpandableBio
+                      role={member.role}
+                      bio={member.bio}
+                      telegramLabel={member.telegramLabel}
+                      telegramUrl={member.telegramUrl}
+                    />
                   </motion.div>
                 ))}
               </div>
@@ -803,15 +801,15 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             {slide.data.image && (
               <motion.div
                 variants={itemVariants}
-                className="relative aspect-square md:aspect-[4/5] rounded-3xl md:rounded-[4rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-[1.5s]"
+                className="relative rounded-3xl md:rounded-[4rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-[1.5s]"
               >
                 <img
                   src={resolveAssetPath(slide.data.image)}
                   alt="Founders"
-                  className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-[2s]"
+                  className="block w-full h-auto scale-110 hover:scale-100 transition-transform duration-[2s]"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-brand/5" />
+                <div className="absolute inset-0 bg-brand/5 pointer-events-none" />
               </motion.div>
             )}
           </div>
@@ -855,7 +853,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                   tabIndex={0}
                   onKeyDown={(e) => e.key === 'Enter' && setSelectedCase(product)}
                 >
-                  <div className="aspect-[4/3] rounded-[2rem] overflow-hidden bg-gray-50 dark:bg-[#151922] mb-8 grayscale hover:grayscale-0 transition-all duration-700 border border-transparent dark:border-white/8">
+                  <div className="aspect-[4/3] rounded-[2rem] overflow-hidden bg-gray-50 dark:bg-[#151922] mb-8 transition-all duration-700 border border-transparent dark:border-white/8">
                     <img
                       src={resolveAssetPath(product.image)}
                       alt={product.client}
@@ -902,13 +900,15 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               {slide.footer}
             </motion.p>
           )}
-          <motion.button
-            variants={itemVariants}
-            onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-brand dark:bg-white text-white dark:text-black rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all shadow-xl hover:shadow-accent/20 active:scale-95"
-          >
-            {slide.data?.primaryCta?.label}
-          </motion.button>
+          {slide.data?.primaryCta && (
+            <motion.button
+              variants={itemVariants}
+              onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 bg-brand dark:bg-white text-white dark:text-black rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all shadow-xl hover:shadow-accent/20 active:scale-95"
+            >
+              {slide.data?.primaryCta?.label}
+            </motion.button>
+          )}
         </div>
         <div className="space-y-4">
           {slide.data?.contacts?.map((contact: any, idx: number) => (
@@ -927,6 +927,90 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
     </div>
   );
 
+  const renderConversion = () => {
+    const isTrust = slide.data?.variant === 'trust';
+
+    return (
+      <div className="flex flex-col justify-center h-full">
+        <motion.div
+          variants={itemVariants}
+          className={`relative overflow-hidden rounded-[2.5rem] border p-8 md:p-12 lg:p-14 ${
+            isTrust
+              ? 'bg-brand text-white border-brand/20 dark:bg-[#0B1220] dark:border-white/10'
+              : 'glass-card bg-white/80 dark:bg-white/5 border-gray-200/60 dark:border-white/10'
+          }`}
+        >
+          <div
+            className={`absolute inset-0 pointer-events-none ${
+              isTrust
+                ? 'bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.28),transparent_36%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_30%)]'
+                : 'bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.45),transparent_32%)]'
+            }`}
+          />
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.9fr)] gap-10 lg:gap-16 items-start">
+            <div className="space-y-6 md:space-y-8">
+              <p className={`text-[10px] font-bold uppercase tracking-[0.3em] ${isTrust ? 'text-white/70' : 'text-accent'}`}>
+                {slide.data?.eyebrow}
+              </p>
+              <h2 className={`text-3xl md:text-5xl font-display font-medium leading-[0.95] tracking-tightest ${isTrust ? 'text-white' : 'text-brand dark:text-white'}`}>
+                {slide.title}
+              </h2>
+              <p className={`text-lg md:text-2xl leading-relaxed max-w-3xl ${isTrust ? 'text-white/78' : 'text-gray-600 dark:text-gray-300'}`}>
+                {slide.description}
+              </p>
+              {slide.footer && (
+                <p className={`text-sm md:text-base leading-relaxed max-w-2xl ${isTrust ? 'text-white/60' : 'text-gray-500 dark:text-gray-400'}`}>
+                  {slide.footer}
+                </p>
+              )}
+
+              {slide.data?.primaryCta && (
+                <button
+                  onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
+                  className={`mt-2 px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all active:scale-95 ${
+                    isTrust
+                      ? 'bg-white text-brand hover:bg-accent hover:text-white shadow-xl shadow-black/10'
+                      : 'bg-black text-white hover:bg-accent shadow-xl shadow-black/10 hover:shadow-accent/20'
+                  }`}
+                >
+                  {slide.data.primaryCta.label}
+                </button>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 gap-4">
+              {slide.points?.map((point: any, idx: number) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  className={`rounded-[1.75rem] px-5 py-5 border backdrop-blur-2xl ${
+                    isTrust
+                      ? 'bg-white text-brand border-white/80 shadow-[0_12px_30px_rgba(15,23,42,0.08)]'
+                      : 'bg-white text-brand border-gray-200/90 shadow-[0_12px_30px_rgba(15,23,42,0.06)] dark:bg-white/95 dark:border-white/20'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div
+                      className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
+                        isTrust ? 'bg-accent/10 text-accent' : 'bg-accent/10 text-accent'
+                      }`}
+                    >
+                      <Check className="w-4 h-4" />
+                    </div>
+                    <p className={`text-sm md:text-base leading-relaxed ${isTrust ? 'text-gray-700' : 'text-gray-700 dark:text-gray-800'}`}>
+                      {typeof point === 'string' ? point : point.text}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    );
+  };
+
   const renderContent = () => {
     switch (slide.type) {
       case 'hero':
@@ -943,6 +1027,8 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
         return renderManifest();
       case 'products':
         return renderProducts();
+      case 'conversion':
+        return renderConversion();
       case 'cta':
         return renderCta();
       default:
@@ -959,15 +1045,21 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       variants={containerVariants}
       className={`relative snap-start px-8 md:px-12 lg:px-20 flex flex-col overflow-visible ${
         slide.id === 'slide-1'
-          ? 'min-h-screen pt-[200px] pb-16 md:pb-20'
+          ? 'min-h-[70vh] min-h-[70svh] pt-[140px] pb-8 md:pb-10'
           : slide.id === 'slide-13'
             ? 'slide-height pt-6 pb-3 md:pt-6 md:pb-3'
+            : slide.type === 'conversion'
+              ? 'slide-height py-10 md:py-14'
             : slide.id === 'slide-problems'
               ? 'slide-height pt-20 pb-12 md:pt-24 md:pb-16'
               : 'slide-height py-20 md:py-24'
       } ${
         slide.id === 'slide-problems'
           ? 'bg-[#FEFDFD] dark:bg-[#0A0D12]'
+          : slide.id === 'slide-conversion-start'
+            ? 'bg-transparent'
+            : slide.id === 'slide-conversion-proof'
+              ? 'bg-transparent'
           : slide.id === 'slide-12'
             ? 'bg-[#FDFCFE] dark:bg-[#0B0E14]'
             : slide.id === 'slide-8'

@@ -61,18 +61,11 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
     <AnimatePresence>
       {isOpen && (
         <div
-          className="fixed inset-0 z-[100] overflow-y-auto overflow-x-hidden scroll-smooth custom-scrollbar"
+          className="fixed inset-0 z-[100] overflow-y-auto overflow-x-hidden scroll-smooth custom-scrollbar bg-black/50 backdrop-blur-md"
           style={{ perspective: '2000px' }}
+          onClick={onClose}
         >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/50 backdrop-blur-md z-0"
-          />
-
-          <div className="relative min-h-full flex items-start justify-center p-0 md:p-12 z-10 pointer-events-none">
+          <div className="relative min-h-[100dvh] flex items-start justify-center p-0 md:p-12 z-10">
             <motion.div
               initial={{ opacity: 0, y: -100, rotateX: -15, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
@@ -84,9 +77,10 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                 opacity: { duration: 0.4 },
               }}
               style={{ transformOrigin: 'top center' }}
-              className="relative w-full max-w-[1620px] bg-white dark:bg-[#050505] md:rounded-[3rem] overflow-hidden flex flex-col pointer-events-auto my-auto"
+              className="relative w-full max-w-[1620px] bg-white dark:bg-[#050505] md:rounded-[3rem] overflow-hidden flex flex-col my-auto"
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-black group overflow-hidden shrink-0">
+              <div className="relative w-full bg-black group overflow-hidden shrink-0">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeImageIdx}
@@ -96,13 +90,13 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="w-full h-full object-cover"
+                    className="block w-full h-auto"
                     loading="eager"
                     decoding="async"
                   />
                 </AnimatePresence>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent flex flex-col justify-end p-6 md:p-12 pt-24 md:pt-32">
                   <div className="max-w-3xl">
                     <motion.span
                       initial={{ opacity: 0, y: 10 }}

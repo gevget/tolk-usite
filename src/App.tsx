@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react';
-import { Menu, Moon, MousePointer2, Sun, X as CloseIcon } from 'lucide-react';
+import { ArrowUp, Menu, Moon, MousePointer2, Sun, X as CloseIcon } from 'lucide-react';
 import { SlideRenderer } from './components/SlideRenderer.tsx';
 import { SLIDES } from './types.ts';
 
@@ -13,6 +13,7 @@ export default function App() {
   const { scrollYProgress } = useScroll();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState('slide-1');
+  const [showScrollTop, setShowScrollTop] = React.useState(false);
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -55,6 +56,18 @@ export default function App() {
     sections.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    const updateScrollTopVisibility = () => {
+      const firstScreenTrigger = Math.max(window.innerHeight * 0.72, 520);
+      setShowScrollTop(window.scrollY > firstScreenTrigger);
+    };
+
+    updateScrollTopVisibility();
+    window.addEventListener('scroll', updateScrollTopVisibility, { passive: true });
+
+    return () => window.removeEventListener('scroll', updateScrollTopVisibility);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -179,6 +192,23 @@ export default function App() {
       </AnimatePresence>
 
       <motion.div className="fixed top-12 left-0 right-0 h-0.5 bg-accent origin-left z-50" style={{ scaleX }} />
+
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, x: -24, scale: 0.92 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: -24, scale: 0.92 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed left-4 md:left-6 bottom-6 md:bottom-10 z-[65] flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-gray-200/80 bg-white/90 text-brand shadow-[0_18px_50px_rgba(15,23,42,0.12)] backdrop-blur-2xl transition-all hover:border-accent hover:bg-accent hover:text-white active:scale-95 dark:border-white/15 dark:bg-[#0B1018]/80 dark:text-white dark:hover:border-accent dark:hover:bg-accent"
+            aria-label="Прокрутить наверх"
+            title="Наверх"
+          >
+            <ArrowUp className="h-5 w-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       <main className="snap-y snap-mandatory bg-white dark:bg-[#050505] scroll-pt-12 transition-colors duration-500 overflow-hidden">
         {SLIDES.map((slide) => (
