@@ -864,10 +864,12 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                   </div>
                   <div className="space-y-5">
                     <div className="flex items-center gap-4">
-                      <div className="p-3 bg-brand/10 rounded-xl">
-                        <DynamicIcon name={iconName} className="w-6 h-6 text-brand" />
+                      <div className="p-3 bg-brand/10 rounded-xl transition-colors group-hover:bg-accent/10">
+                        <DynamicIcon name={iconName} className="w-6 h-6 text-brand group-hover:text-accent transition-colors" />
                       </div>
-                      <h3 className="text-2xl md:text-4xl font-display font-medium text-brand tracking-tightest">{product.client}</h3>
+                      <h3 className="text-2xl md:text-4xl font-display font-medium text-brand tracking-tightest transition-colors group-hover:text-accent">
+                        {product.client}
+                      </h3>
                     </div>
                     <p className="text-gray-500 dark:text-gray-300 text-base md:text-lg leading-relaxed">{product.task}</p>
                   </div>
@@ -971,8 +973,8 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                   onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
                   className={`mt-2 px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all active:scale-95 ${
                     isTrust
-                      ? 'bg-white text-brand hover:bg-accent hover:text-white shadow-xl shadow-black/10'
-                      : 'bg-black text-white hover:bg-accent shadow-xl shadow-black/10 hover:shadow-accent/20'
+                      ? 'bg-white text-brand hover:bg-accent hover:text-white dark:bg-white dark:text-brand dark:hover:bg-accent dark:hover:text-white shadow-xl shadow-black/10 dark:shadow-black/20'
+                      : 'bg-black text-white hover:bg-accent shadow-xl shadow-black/10 hover:shadow-accent/20 dark:bg-accent dark:text-white dark:hover:bg-white dark:hover:text-brand dark:shadow-accent/25'
                   }`}
                 >
                   {slide.data.primaryCta.label}

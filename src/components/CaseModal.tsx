@@ -32,6 +32,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
     } else {
       document.body.style.overflow = '';
     }
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -80,7 +81,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
               className="relative w-full max-w-[1620px] bg-white dark:bg-[#050505] md:rounded-[3rem] overflow-hidden flex flex-col my-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative w-full bg-black group overflow-hidden shrink-0">
+              <div className="relative w-full bg-white dark:bg-[#050505] group overflow-hidden shrink-0">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeImageIdx}
@@ -95,25 +96,6 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                     decoding="async"
                   />
                 </AnimatePresence>
-
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent flex flex-col justify-end p-6 md:p-12 pt-24 md:pt-32">
-                  <div className="max-w-3xl">
-                    <motion.span
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-white/60 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-4 block"
-                    >
-                      Case Study — {caseData.client}
-                    </motion.span>
-                    <motion.h2
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-white text-3xl md:text-5xl lg:text-6xl font-display font-medium tracking-tightest leading-[1.05]"
-                    >
-                      {caseData.fullContent.title}
-                    </motion.h2>
-                  </div>
-                </div>
 
                 {gallery.length > 1 && (
                   <>
@@ -164,6 +146,20 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24">
                     <div className="lg:col-span-8 space-y-20">
                       <section>
+                        <motion.span
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-gray-400 dark:text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-5 block"
+                        >
+                          Case Study - {caseData.client}
+                        </motion.span>
+                        <motion.h2
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-brand dark:text-white text-3xl md:text-5xl lg:text-6xl font-display font-medium tracking-tightest leading-[1.05] mb-6"
+                        >
+                          {caseData.fullContent.title}
+                        </motion.h2>
                         <h3 className="text-brand dark:text-white text-2xl md:text-3xl font-display font-medium mb-6 leading-tight">
                           {caseData.fullContent.subtitle}
                         </h3>
@@ -231,7 +227,10 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                         </h4>
                         <div className="space-y-4">
                           {caseData.fullContent.results.map((r, i) => (
-                            <div key={i} className="flex items-center gap-4 py-4 border-b border-gray-200/50 dark:border-white/5 last:border-0 hover:translate-x-2 transition-transform duration-300">
+                            <div
+                              key={i}
+                              className="flex items-center gap-4 py-4 border-b border-gray-200/50 dark:border-white/5 last:border-0 hover:translate-x-2 transition-transform duration-300"
+                            >
                               <div className="w-2 h-2 rounded-full bg-accent" />
                               <span className="text-gray-700 dark:text-gray-200 font-medium">{r}</span>
                             </div>

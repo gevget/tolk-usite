@@ -269,7 +269,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: '(ФНС) Безопасная сделка',
           subtitle: 'Escrow-механизм для самозанятых в приложении «Мой налог»',
-          gallery: ['/src/assets/images/fns.jpg'],
+          gallery: ['/src/assets/images/fns 1.png'],
           problem: [
             { text: 'Страх предоплаты у клиентов', icon: 'ShieldAlert' },
             { text: 'Риск неоплаты у исполнителей', icon: 'UserX' },
@@ -295,7 +295,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Yandex Support AI',
           subtitle: 'AI-система поддержки + полностью кастомизируемый виджет',
-          gallery: ['/src/assets/images/yandex.jpg'],
+          gallery: ['/src/assets/images/yandex 1.png'],
           problem: [
             { text: 'Стандартные виджеты ломают UX', icon: 'Layout' },
             { text: 'Нельзя адаптировать под продукт', icon: 'UserCog' },
@@ -320,7 +320,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'DSC (Docke Supply Center)',
           subtitle: 'B2B-платформа закупок строительных материалов',
-          gallery: ['/src/assets/images/dsc.jpg'],
+          gallery: ['/src/assets/images/dsc 1.png'],
           problem: [
             { text: 'Заказы через менеджеров', icon: 'Users' },
             { text: 'Ошибки в номенклатуре', icon: 'FileX' },
@@ -345,7 +345,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'STOLKOM (AI Bot Platform)',
           subtitle: 'Платформа автоматизации коммуникации с клиентами',
-          gallery: ['/src/assets/images/stolkom.jpg'],
+          gallery: ['/src/assets/images/stolkom 1.png'],
           problem: [
             { text: 'Разрозненные каналы общения', icon: 'MessageSquareOff' },
             { text: 'Ручная работа операторов', icon: 'HandMetal' },
@@ -370,7 +370,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'SIMB-AD',
           subtitle: 'Платформа управления digital-рекламой',
-          gallery: ['/src/assets/images/simb.jpg'],
+          gallery: ['/src/assets/images/simbad 1.png'],
           problem: [
             { text: 'Медиапланы в Excel', icon: 'FileSpreadsheet' },
             { text: 'Согласования в чатах', icon: 'MessageCircle' },
@@ -396,7 +396,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'BusinessFOX',
           subtitle: 'EdTech-платформа: обучение + CRM + ERP + франшиза',
-          gallery: ['/src/assets/images/fox.jpg'],
+          gallery: ['/src/assets/images/fox 1.png'],
           problem: [
             { text: 'Нет сформированного продукта на старте', icon: 'PackageX' },
             { text: 'Нет IT-системы', icon: 'XCircle' },
@@ -421,7 +421,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'ProNetwork',
           subtitle: 'Операционная система бизнеса внутри Telegram',
-          gallery: ['/src/assets/images/pronet.png'],
+          gallery: ['/src/assets/images/pronet 1.png'],
           problem: [
             { text: 'Переписки теряются', icon: 'MessageCircleOff' },
             { text: 'Нет фиксации договоренностей', icon: 'FileX' },
@@ -446,7 +446,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Catalon',
           subtitle: 'Платформа управления грузоперевозок с «управляемой сделкой»',
-          gallery: ['/src/assets/images/catalon.png'],
+          gallery: ['/src/assets/images/catalon 2.png'],
           problem: [
             { text: 'Перегруз операторов', icon: 'UserMinus' },
             { text: 'Ручное распределение заявок', icon: 'HandMetal' },
@@ -471,7 +471,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Нижегородский водоканал',
           subtitle: 'Цифровая платформа для жителей и бизнеса',
-          gallery: ['/src/assets/images/vod.png'],
+          gallery: ['/src/assets/images/vod 1.png'],
           problem: [
             { text: 'Ручная передача показаний', icon: 'HandMetal' },
             { text: 'Перегруз колл-центров', icon: 'PhoneOff' },
@@ -496,7 +496,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Leads.Work',
           subtitle: 'Система управления лидами и скоростью обработки заявок',
-          gallery: ['/src/assets/images/leads.png'],
+          gallery: ['/src/assets/images/leads 1.png'],
           problem: [
             { text: 'Лиды приходят из разных каналов и теряются', icon: 'Inbox' },
             { text: 'Нет прозрачности по статусам и ответственным', icon: 'EyeOff' },
@@ -521,7 +521,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Сетка данных',
           subtitle: 'Единый слой данных для принятия решений и операционной работы',
-          gallery: ['/src/assets/images/setka.png'],
+          gallery: ['/src/assets/images/setka 1.png'],
           problem: [
             { text: 'Данные разбросаны по таблицам, кабинетам и сервисам', icon: 'DatabaseZap' },
             { text: 'Отчётность собирается вручную и устаревает', icon: 'FileSpreadsheet' },
@@ -546,7 +546,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Мой район',
           subtitle: 'Цифровой сервис для жителей, локальных услуг и обращений',
-          gallery: ['/src/assets/images/moy.png'],
+          gallery: ['/src/assets/images/moy 1.png'],
           problem: [
             { text: 'Жителям сложно быстро решать бытовые и районные вопросы', icon: 'MapPinned' },
             { text: 'Сервисы и обращения разбросаны по разным каналам', icon: 'MessageSquareOff' },
@@ -683,7 +683,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Catalon',
           subtitle: 'Платформа управления грузоперевозками с «управляемой сделкой»',
-          gallery: ['/src/assets/images/catalon.png'],
+          gallery: ['/src/assets/images/catalon 2.png'],
           problem: [
             { text: 'Перегруз операторов', icon: 'UserMinus' },
             { text: 'Ручное распределение заявок', icon: 'HandMetal' },
@@ -708,7 +708,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'Моё Будущее',
           subtitle: 'AI-навигация склонностей школьников и кадровый прогноз',
-          gallery: ['/src/assets/images/future.png'],
+          gallery: ['/src/assets/images/future 1.png'],
           problem: [
             { text: 'Сложно определить склонности и траекторию развития', icon: 'Compass' },
             { text: 'Нет целостной картины по кадровым дефицитам', icon: 'Users' },
@@ -731,7 +731,7 @@ const LEGACY_SLIDES: SlideContent[] = [
         fullContent: {
           title: 'SMM-база',
           subtitle: 'Платформа для ведения соцсетей, отчётности и автопроцессов',
-          gallery: ['/src/assets/images/smmbaza.png'],
+          gallery: ['/src/assets/images/smmbaza 1.png'],
           problem: [
             { text: 'Ручное ведение контента и публикаций', icon: 'HandMetal' },
             { text: 'Сложно собирать отчётность и аналитику', icon: 'FileSpreadsheet' },
@@ -792,7 +792,7 @@ const aiSystemsProduct = {
   fullContent: {
     title: 'AI Systems',
     subtitle: 'Внутренние AI-инструменты для поиска знаний, документов и поддержки команды',
-    gallery: ['/src/assets/images/ai.png'],
+    gallery: ['/src/assets/images/ai 1.png'],
     problem: [
       { text: 'Сотрудники тонут в документах и сообщениях', icon: 'FileQuestion' },
       { text: 'Знания компании разбросаны по разным системам', icon: 'Search' },
