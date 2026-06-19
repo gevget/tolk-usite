@@ -745,7 +745,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
 
     return (
       <>
-        <div className="flex flex-col h-full justify-center">
+        <div className="flex flex-col h-auto justify-start md:h-full md:justify-center">
           <motion.h2
             variants={itemVariants}
             className="text-3xl md:text-6xl font-display font-medium mb-16 md:mb-24 tracking-tightest leading-none"
@@ -759,7 +759,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               const isBigRow = row.length === 1;
 
               return (
-                <div key={rowIdx} className={`grid grid-cols-1 ${colClass} gap-x-8 md:gap-x-12 gap-y-10 md:gap-y-16`}>
+                <div key={rowIdx} className={`grid grid-cols-1 ${colClass} gap-x-8 md:gap-x-12 gap-y-8 md:gap-y-16`}>
                   {row.map((item: any) => {
                     const preview = buildCasePreview(item);
 
@@ -1138,6 +1138,8 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               ? 'py-2 md:py-4'
             : slide.id === 'slide-why'
               ? 'py-8 md:slide-height md:py-24'
+            : slide.id === 'slide-11'
+              ? 'pt-8 pb-8 md:slide-height md:py-24'
             : slide.id === 'slide-problems'
               ? 'slide-height pt-10 pb-2 md:pt-24 md:pb-2'
               : 'slide-height py-10 md:py-24'
