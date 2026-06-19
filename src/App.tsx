@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'motion/react';
-import { ArrowUp, Menu, Moon, MousePointer2, Sun, X as CloseIcon } from 'lucide-react';
+import { ArrowUp, Menu, Moon, Sun, X as CloseIcon } from 'lucide-react';
 import { SlideRenderer } from './components/SlideRenderer.tsx';
 import { SLIDES } from './types.ts';
 
@@ -21,6 +21,7 @@ export default function App() {
     damping: 30,
     restDelta: 0.001,
   });
+  const isHeroActive = activeSection === 'slide-1';
 
   const [isDark, setIsDark] = React.useState(() => {
     if (typeof window !== 'undefined') {
@@ -84,7 +85,7 @@ export default function App() {
     { label: 'С чего начать', id: 'slide-start' },
     { label: 'Клиенты', id: 'slide-10' },
     { label: 'Проблемы', id: 'slide-problems' },
-    { label: 'AI', id: 'slide-8' },
+    { label: 'ИИ', id: 'slide-8' },
     { label: 'Команда', id: 'slide-why' },
     { label: 'Кейсы', id: 'slide-11' },
     { label: 'Продукты', id: 'slide-12' },
@@ -96,11 +97,16 @@ export default function App() {
       <div className="grain-overlay" />
       <div className="flowing-bg" />
 
-      <header className="fixed top-0 left-0 right-0 h-12 glass-nav z-[60] px-4 md:px-6 flex items-center justify-between transition-colors">
+      <header className={`fixed top-0 left-0 right-0 h-12 z-[60] px-4 md:px-6 flex items-center justify-between transition-colors ${
+        isHeroActive ? 'bg-white/72 backdrop-blur-xl border-b border-gray-200/60 shadow-[0_8px_22px_rgba(15,23,42,0.05)]' : 'glass-nav'
+      }`}>
         <div className="flex items-center gap-4 lg:gap-8">
-          <div className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 bg-brand dark:bg-white rounded-full" />
-            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-brand dark:text-white">TOLK × USITE</span>
+          <div
+            className="flex items-center gap-2 text-white"
+            style={{ mixBlendMode: 'difference' }}
+          >
+            <div className="h-2.5 w-2.5 rounded-full bg-current" />
+            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-current">TOLK × USITE</span>
           </div>
           <nav className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => (
@@ -110,7 +116,9 @@ export default function App() {
                 className={`text-[10px] font-bold uppercase tracking-widest transition-all duration-300 relative group px-2 py-1 ${
                   activeSection === item.id
                     ? 'text-accent'
-                    : 'text-gray-400 dark:text-gray-300 hover:text-accent dark:hover:text-white'
+                    : isHeroActive
+                      ? 'text-gray-400 hover:text-accent'
+                      : 'text-gray-400 dark:text-gray-300 hover:text-accent dark:hover:text-white'
                 }`}
               >
                 {item.label}
@@ -129,7 +137,7 @@ export default function App() {
         <div className="flex items-center gap-2 md:gap-4">
           <button
             onClick={() => setIsDark(!isDark)}
-            className="p-2 text-gray-400 dark:text-gray-400 hover:text-brand dark:hover:text-white transition-colors"
+            className={`p-2 text-gray-400 transition-colors ${isHeroActive ? 'hover:text-brand' : 'dark:text-gray-400 hover:text-brand dark:hover:text-white'}`}
             aria-label={isDark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему'}
           >
             {isDark ? (
@@ -140,13 +148,17 @@ export default function App() {
           </button>
           <button
             onClick={() => scrollToSection('slide-13')}
-            className="hidden sm:block px-5 py-1.5 bg-gray-900 dark:bg-white dark:text-black text-white text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-accent hover:text-white transition-all shadow-lg hover:shadow-accent/20 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className={`hidden sm:block px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all shadow-lg hover:shadow-accent/20 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+              isHeroActive
+                ? 'bg-gray-900 text-white hover:bg-accent hover:text-white'
+                : 'bg-gray-900 dark:bg-[#121826] dark:text-white text-white hover:bg-accent hover:text-white dark:hover:bg-accent'
+            }`}
           >
             Обсудить проект
           </button>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-gray-400 dark:text-gray-300"
+            className={`lg:hidden p-2 ${isHeroActive ? 'text-gray-500' : 'text-gray-400 dark:text-gray-300'}`}
             aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
             aria-expanded={isMenuOpen}
           >
@@ -173,7 +185,7 @@ export default function App() {
                   transition={{ delay: idx * 0.05 }}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-[1.85rem] md:text-3xl font-display font-medium text-left transition-colors ${
-                    activeSection === item.id ? 'text-accent' : 'text-brand dark:text-white hover:text-accent'
+                    activeSection === item.id ? 'text-accent' : isHeroActive ? 'text-brand hover:text-accent' : 'text-brand dark:text-white hover:text-accent'
                   }`}
                 >
                   {item.label}
@@ -183,7 +195,11 @@ export default function App() {
             <div className="mt-auto pb-8 md:pb-12">
               <button
                 onClick={() => scrollToSection('slide-13')}
-                className="w-full py-3.5 md:py-6 bg-brand dark:bg-white text-white dark:text-black rounded-[1.2rem] md:rounded-3xl font-display font-medium text-base md:text-xl shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className={`w-full py-3.5 md:py-6 rounded-[1.2rem] md:rounded-3xl font-display font-medium text-base md:text-xl shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                  isHeroActive
+                    ? 'bg-brand text-white'
+                    : 'bg-brand dark:bg-[#121826] text-white dark:text-white'
+                }`}
               >
                 Обсудить проект
               </button>
@@ -216,17 +232,6 @@ export default function App() {
           <SlideRenderer key={slide.id} slide={slide} />
         ))}
       </main>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-        className="fixed bottom-10 right-10 z-40 hidden xl:flex items-center gap-6 text-gray-300 dark:text-gray-700 text-[10px] font-bold uppercase tracking-[0.3em] pointer-events-none transition-colors"
-      >
-        <span className="dark:text-white/20 italic">deploying future</span>
-        <div className="w-12 h-px bg-gray-200 dark:bg-white/5" />
-        <MousePointer2 className="w-3 h-3 animate-bounce" aria-hidden="true" focusable="false" />
-      </motion.div>
 
       <div className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden opacity-20 dark:opacity-45 md:block">
         <motion.div

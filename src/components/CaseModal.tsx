@@ -181,7 +181,7 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                           animate={{ opacity: 1, y: 0 }}
                           className="text-gray-400 dark:text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-5 block"
                         >
-                          Case Study - {caseData.client}
+                          Кейс — {caseData.client}
                         </motion.span>
                         <motion.h2
                           initial={{ opacity: 0, y: 20 }}

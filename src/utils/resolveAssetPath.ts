@@ -1,34 +1,46 @@
-import aiInner from '../assets/images/ai 1.webp';
+import aiInner from '../assets/images/ai 1.png';
 import ai from '../assets/images/ai.webp';
-import catalonInner from '../assets/images/catalon 2.webp';
+import aiAssistantCard from '../assets/images/ai as.png';
+import aiAuditCard from '../assets/images/ai audit.png';
+import catalonInner from '../assets/images/catalon 2.png';
 import catalon from '../assets/images/catalon.webp';
-import dscInner from '../assets/images/dsc 1.webp';
+import day5Card from '../assets/images/5 day.png';
+import roadmapCard from '../assets/images/1 roadmap.png';
+import productStructureCard from '../assets/images/2 prod.png';
+import uxCard from '../assets/images/3 ux.png';
+import firstVersionCard from '../assets/images/4 mvp.png';
+import contourCard from '../assets/images/5 cont.png';
+import growthBaseCard from '../assets/images/6 baza.png';
+import dscInner from '../assets/images/dsc 1.png';
 import dsc from '../assets/images/dsc.webp';
-import fnsInner from '../assets/images/fns 1.webp';
+import b2bCard from '../assets/images/b2b.png';
+import fnsInner from '../assets/images/fns 1.png';
 import fns from '../assets/images/fns.webp';
-import foxInner from '../assets/images/fox 1.webp';
+import foxInner from '../assets/images/fox 1.png';
 import fox from '../assets/images/fox.webp';
-import futureInner from '../assets/images/future 1.webp';
+import futureInner from '../assets/images/future 1.png';
 import future from '../assets/images/future.webp';
 import heroNew from '../assets/images/hero new.webp';
 import komanda from '../assets/images/komanda.webp';
-import leadsInner from '../assets/images/leads 1.webp';
+import lkCard from '../assets/images/lk.png';
+import leadsInner from '../assets/images/leads 1.png';
 import leads from '../assets/images/leads.webp';
-import moyInner from '../assets/images/moy 1.webp';
+import mvpCard from '../assets/images/MVP.png';
+import moyInner from '../assets/images/moy 1.png';
 import moy from '../assets/images/moy.webp';
-import pronetInner from '../assets/images/pronet 1.webp';
+import pronetInner from '../assets/images/pronet 1.png';
 import pronet from '../assets/images/pronet.webp';
-import setkaInner from '../assets/images/setka 1.webp';
+import setkaInner from '../assets/images/setka 1.png';
 import setka from '../assets/images/setka.webp';
-import simbadInner from '../assets/images/simbad 1.webp';
+import simbadInner from '../assets/images/simbad 1.png';
 import simb from '../assets/images/simb.webp';
-import smmbazaInner from '../assets/images/smmbaza 1.webp';
+import smmbazaInner from '../assets/images/smmbaza 1.png';
 import smmbaza from '../assets/images/smmbaza.webp';
-import stolkomInner from '../assets/images/stolkom 1.webp';
+import stolkomInner from '../assets/images/stolkom 1.png';
 import stolkom from '../assets/images/stolkom.webp';
-import vodInner from '../assets/images/vod 1.webp';
+import vodInner from '../assets/images/vod 1.png';
 import vod from '../assets/images/vod.webp';
-import yandexInner from '../assets/images/yandex 1.webp';
+import yandexInner from '../assets/images/yandex 1.png';
 import yandex from '../assets/images/yandex.webp';
 
 const baseUrl = import.meta.env.BASE_URL;
@@ -36,17 +48,27 @@ const baseUrl = import.meta.env.BASE_URL;
 const publicAssetMap: Record<string, string> = {
   '/hero-one.png': `${baseUrl}hero-one.png`,
   '/work.png': `${baseUrl}work.webp`,
-  '/skill.png': `${baseUrl}skill.webp`,
-  '/ai-inside.png': `${baseUrl}ai-inside.webp`,
+  '/skill.png': `${baseUrl}skill.png`,
+  '/ai-inside.png': `${baseUrl}ai-inside.png`,
 };
 
 const importedAssetMap: Record<string, string> = {
   '/src/assets/images/ai 1.png': aiInner,
   '/src/assets/images/ai.png': ai,
+  '/src/assets/images/ai as.png': aiAssistantCard,
+  '/src/assets/images/ai audit.png': aiAuditCard,
   '/src/assets/images/catalon 2.png': catalonInner,
   '/src/assets/images/catalon.png': catalon,
+  '/src/assets/images/5 day.png': day5Card,
+  '/src/assets/images/1 roadmap.png': roadmapCard,
+  '/src/assets/images/2 prod.png': productStructureCard,
+  '/src/assets/images/3 ux.png': uxCard,
+  '/src/assets/images/4 mvp.png': firstVersionCard,
+  '/src/assets/images/5 cont.png': contourCard,
+  '/src/assets/images/6 baza.png': growthBaseCard,
   '/src/assets/images/dsc 1.png': dscInner,
   '/src/assets/images/dsc.jpg': dsc,
+  '/src/assets/images/b2b.png': b2bCard,
   '/src/assets/images/fns 1.png': fnsInner,
   '/src/assets/images/fns.jpg': fns,
   '/src/assets/images/fox 1.png': foxInner,
@@ -55,8 +77,10 @@ const importedAssetMap: Record<string, string> = {
   '/src/assets/images/future.png': future,
   '/src/assets/images/hero new.png': heroNew,
   '/src/assets/images/komanda.png': komanda,
+  '/src/assets/images/lk.png': lkCard,
   '/src/assets/images/leads 1.png': leadsInner,
   '/src/assets/images/leads.png': leads,
+  '/src/assets/images/MVP.png': mvpCard,
   '/src/assets/images/moy 1.png': moyInner,
   '/src/assets/images/moy.png': moy,
   '/src/assets/images/pronet 1.png': pronetInner,
@@ -95,13 +119,25 @@ const assetDimensionsMap: Record<string, { width: number; height: number }> = {
   '/ai-inside.png': { width: 860, height: 739 },
   '/src/assets/images/hero new.png': { width: 700, height: 700 },
   '/src/assets/images/komanda.png': { width: 780, height: 800 },
+  '/src/assets/images/5 day.png': { width: 1080, height: 810 },
+  '/src/assets/images/1 roadmap.png': { width: 1080, height: 810 },
+  '/src/assets/images/2 prod.png': { width: 1080, height: 810 },
+  '/src/assets/images/3 ux.png': { width: 1080, height: 810 },
+  '/src/assets/images/4 mvp.png': { width: 1080, height: 810 },
+  '/src/assets/images/5 cont.png': { width: 1080, height: 810 },
+  '/src/assets/images/6 baza.png': { width: 1080, height: 810 },
   '/src/assets/images/ai.png': { width: 680, height: 510 },
+  '/src/assets/images/ai as.png': { width: 1080, height: 810 },
+  '/src/assets/images/ai audit.png': { width: 1080, height: 810 },
+  '/src/assets/images/b2b.png': { width: 1080, height: 810 },
   '/src/assets/images/catalon.png': { width: 680, height: 510 },
   '/src/assets/images/dsc.jpg': { width: 680, height: 510 },
   '/src/assets/images/fns.jpg': { width: 680, height: 510 },
   '/src/assets/images/fox.jpg': { width: 680, height: 510 },
   '/src/assets/images/future.png': { width: 680, height: 510 },
+  '/src/assets/images/lk.png': { width: 1080, height: 810 },
   '/src/assets/images/leads.png': { width: 680, height: 510 },
+  '/src/assets/images/MVP.png': { width: 1080, height: 810 },
   '/src/assets/images/moy.png': { width: 680, height: 510 },
   '/src/assets/images/pronet.png': { width: 680, height: 510 },
   '/src/assets/images/setka.png': { width: 680, height: 510 },

@@ -339,20 +339,20 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
           </div>
           <motion.p
             variants={itemVariants}
-            className="text-2xl md:text-[2.625rem] font-display font-medium leading-[0.9] mb-6 md:mb-8 tracking-tightest text-brand/40"
+            className="text-2xl md:text-[2.625rem] font-display font-medium leading-[0.9] mb-6 md:mb-8 tracking-tightest text-black/40"
           >
             {slide.data?.brand}
           </motion.p>
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-[3.625rem] font-display font-medium leading-[0.95] mb-6 md:mb-8 tracking-tightest text-brand max-w-5xl"
+            className="text-4xl md:text-[3.625rem] font-display font-medium leading-[0.95] mb-6 md:mb-8 tracking-tightest text-black max-w-5xl"
           >
             {slide.title}
           </motion.h1>
         </motion.div>
 
         <motion.div variants={itemVariants} className="max-w-2xl">
-          <p className="text-lg md:text-xl leading-relaxed text-gray-500 font-normal">
+          <p className="text-lg md:text-xl leading-relaxed text-gray-600 font-normal">
             {slide.description}
           </p>
 
@@ -483,7 +483,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                     </div>
                     <div className="space-y-0.5">
                       <span className="text-gray-300 dark:text-gray-700 font-mono text-[8px] tracking-[0.2em] uppercase block mb-1">
-                        Point // 0{idx + 1}
+                        Пункт // 0{idx + 1}
                       </span>
                       <h4 className="text-lg md:text-xl font-display font-medium leading-tight text-gray-800 dark:text-gray-200 group-hover:text-brand dark:group-hover:text-white transition-colors">
                         {point.text}
@@ -578,17 +578,35 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                className="p-6 md:p-10 glass-card rounded-[1.5rem] md:rounded-[2.5rem] bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col"
+                className="px-0 pt-0 pb-6 md:pb-10 glass-card rounded-[1.5rem] md:rounded-[2.5rem] bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col"
               >
                 <div className="absolute -top-12 -right-12 w-32 h-32 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors" />
-                <div className="w-16 h-16 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform">
-                  <DynamicIcon name={item.icon} className="w-10 h-10 text-accent" />
+                {item.image ? (
+                  <div className="mb-6 md:mb-8 overflow-hidden rounded-t-[1.5rem] md:rounded-t-[2.5rem] rounded-b-none border border-gray-100/80 border-x-0 border-t-0 bg-gray-50 dark:border-white/8 dark:bg-white/5">
+                    <img
+                      src={resolveAssetPath(item.image)}
+                      alt={item.title}
+                      className="h-auto w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                      width={getAssetDimensions(item.image)?.width}
+                      height={getAssetDimensions(item.image)?.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : (
+                  <div className="px-6 md:px-10 pt-6 md:pt-10">
+                    <div className="w-16 h-16 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                      <DynamicIcon name={item.icon} className="w-10 h-10 text-accent" />
+                    </div>
+                    <div className="h-1 w-8 bg-accent/30 mb-8 group-hover:w-16 group-hover:bg-accent transition-all duration-500" />
+                  </div>
+                )}
+                <div className="px-6 md:px-10">
+                  <h3 className="text-2xl md:text-4xl font-display font-medium mb-4 group-hover:text-accent transition-colors leading-tight text-brand dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm md:text-base">{item.details}</p>
                 </div>
-                <div className="h-1 w-8 bg-accent/30 mb-8 group-hover:w-16 group-hover:bg-accent transition-all duration-500" />
-                <h3 className="text-2xl md:text-4xl font-display font-medium mb-4 group-hover:text-accent transition-colors leading-tight text-brand dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm md:text-base mt-auto">{item.details}</p>
               </motion.div>
             ))}
           </div>
@@ -597,17 +615,35 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               <motion.div
                 key={`tail-${idx}`}
                 variants={itemVariants}
-                className="p-6 md:p-10 glass-card rounded-[1.5rem] md:rounded-[2.5rem] bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col"
+                className="px-0 pt-0 pb-6 md:pb-10 glass-card rounded-[1.5rem] md:rounded-[2.5rem] bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col"
               >
                 <div className="absolute -top-12 -right-12 w-32 h-32 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors" />
-                <div className="w-16 h-16 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform">
-                  <DynamicIcon name={item.icon} className="w-10 h-10 text-accent" />
+                {item.image ? (
+                  <div className="mb-6 md:mb-8 overflow-hidden rounded-t-[1.5rem] md:rounded-t-[2.5rem] rounded-b-none border border-gray-100/80 border-x-0 border-t-0 bg-gray-50 dark:border-white/8 dark:bg-white/5">
+                    <img
+                      src={resolveAssetPath(item.image)}
+                      alt={item.title}
+                      className="h-auto w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                      width={getAssetDimensions(item.image)?.width}
+                      height={getAssetDimensions(item.image)?.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : (
+                  <div className="px-6 md:px-10 pt-6 md:pt-10">
+                    <div className="w-16 h-16 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                      <DynamicIcon name={item.icon} className="w-10 h-10 text-accent" />
+                    </div>
+                    <div className="h-1 w-8 bg-accent/30 mb-8 group-hover:w-16 group-hover:bg-accent transition-all duration-500" />
+                  </div>
+                )}
+                <div className="px-6 md:px-10">
+                  <h3 className="text-2xl md:text-4xl font-display font-medium mb-4 group-hover:text-accent transition-colors leading-tight text-brand dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm md:text-base">{item.details}</p>
                 </div>
-                <div className="h-1 w-8 bg-accent/30 mb-8 group-hover:w-16 group-hover:bg-accent transition-all duration-500" />
-                <h3 className="text-2xl md:text-4xl font-display font-medium mb-4 group-hover:text-accent transition-colors leading-tight text-brand dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm md:text-base mt-auto">{item.details}</p>
               </motion.div>
             ))}
           </div>
@@ -616,23 +652,42 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
           {slide.data.map((item: any, idx: number) => {
             const isWide = slide.data.length === 5 && idx >= slide.data.length - 2;
+            const isStartCard = slide.id === 'slide-start';
             return (
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                className={`p-6 md:p-10 glass-card rounded-[1.5rem] md:rounded-[2.5rem] bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col ${
+                className={`${isStartCard ? 'px-0 pt-0 pb-6 md:pb-10' : 'p-6 md:p-10'} glass-card rounded-[1.5rem] md:rounded-[2.5rem] bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col ${
                   isWide ? 'xl:col-span-2' : ''
                 }`}
               >
                 <div className="absolute -top-12 -right-12 w-32 h-32 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors" />
-                <div className="w-16 h-16 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform">
-                  <DynamicIcon name={item.icon} className="w-10 h-10 text-accent" />
+                {item.image ? (
+                  <div className={`${isStartCard ? 'mb-6 md:mb-8 rounded-t-[1.5rem] md:rounded-t-[2.5rem] rounded-b-none border-x-0 border-t-0' : 'mb-8 rounded-[1.25rem] md:rounded-[2rem]'} overflow-hidden border border-gray-100/80 bg-gray-50 dark:border-white/8 dark:bg-white/5`}>
+                    <img
+                      src={resolveAssetPath(item.image)}
+                      alt={item.title}
+                      className={`${isStartCard ? 'h-auto w-full object-contain' : 'h-[300px] w-full object-cover'} transition-transform duration-700 group-hover:scale-[1.03]`}
+                      width={getAssetDimensions(item.image)?.width}
+                      height={getAssetDimensions(item.image)?.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : (
+                  <div className={isStartCard ? 'px-6 md:px-10 pt-6 md:pt-10' : ''}>
+                    <div className="w-16 h-16 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                      <DynamicIcon name={item.icon} className="w-10 h-10 text-accent" />
+                    </div>
+                    <div className="h-1 w-8 bg-accent/30 mb-8 group-hover:w-16 group-hover:bg-accent transition-all duration-500" />
+                  </div>
+                )}
+                <div className={isStartCard ? 'px-6 md:px-10' : ''}>
+                  <h3 className="text-2xl md:text-4xl font-display font-medium mb-4 group-hover:text-accent transition-colors leading-tight text-brand dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm md:text-base">{item.details}</p>
                 </div>
-                <div className="h-1 w-8 bg-accent/30 mb-8 group-hover:w-16 group-hover:bg-accent transition-all duration-500" />
-                <h3 className="text-2xl md:text-4xl font-display font-medium mb-4 group-hover:text-accent transition-colors leading-tight text-brand dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm md:text-base mt-auto">{item.details}</p>
               </motion.div>
             );
           })}
@@ -664,7 +719,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-bl-full blur-2xl group-hover:bg-accent/10 transition-colors" />
             <span className="text-[10px] font-mono font-bold text-gray-300 dark:text-gray-600 group-hover:text-accent transition-colors block tracking-widest whitespace-nowrap">
-              CLIENT // 0{idx + 1}
+              Клиент // 0{idx + 1}
             </span>
             <div className="h-px bg-gray-100 dark:bg-white/10 w-8 group-hover:w-full group-hover:bg-accent transition-all duration-700" />
             <span className="text-lg md:text-xl font-display text-gray-400 dark:text-gray-500 group-hover:text-brand dark:group-hover:text-white transition-colors cursor-default leading-tight">
@@ -780,7 +835,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   const renderManifest = () => (
     <div className="flex flex-col h-full justify-start md:justify-center">
       <motion.div variants={itemVariants} className="max-w-none">
-        <span className="text-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-12 block">Why us</span>
+        <span className="text-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-12 block">Почему мы</span>
         <h2 className="text-3xl md:text-6xl font-display font-medium leading-[0.95] tracking-tightest text-brand dark:text-white mb-14 md:mb-20">
           {slide.title}
         </h2>
@@ -789,7 +844,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
           <div className="mt-10 md:mt-16 pt-8 md:pt-12 border-t border-gray-100 dark:border-white/10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-18 items-start">
             <div className="space-y-8 md:space-y-10">
               <div className="space-y-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-accent">Founder-led in practice</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-accent">Основатели в работе</p>
                 <h3 className="text-3xl md:text-5xl font-display font-medium tracking-tightest text-brand dark:text-white">
                   Стратегия, продукт, дизайн и технология в одном живом контуре
                 </h3>
@@ -825,7 +880,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               >
                 <img
                   src={resolveAssetPath(slide.data.image)}
-                  alt="Founders"
+                  alt="Команда основателей"
                   className="block w-full h-auto transition-transform duration-[1.2s]"
                   referrerPolicy="no-referrer"
                   width={getAssetDimensions(slide.data.image)?.width}
@@ -935,7 +990,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             <motion.button
               variants={itemVariants}
               onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 py-3 md:px-8 md:py-4 bg-brand dark:bg-white text-white dark:text-black rounded-xl md:rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all shadow-xl hover:shadow-accent/20 active:scale-95"
+              className="px-6 py-3 md:px-8 md:py-4 bg-brand dark:bg-[#121826] text-white dark:text-white rounded-xl md:rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all shadow-xl hover:shadow-accent/20 active:scale-95"
             >
               {slide.data?.primaryCta?.label}
             </motion.button>
@@ -947,7 +1002,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               key={idx}
               href={contact.value}
               variants={itemVariants}
-            className="flex items-center justify-between p-4 md:p-8 bg-brand dark:bg-white text-white dark:text-black rounded-[1.2rem] md:rounded-3xl hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all w-full group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="flex items-center justify-between p-4 md:p-8 bg-brand dark:bg-[#121826] text-white dark:text-white rounded-[1.2rem] md:rounded-3xl hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all w-full group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <span className="text-xl font-medium tracking-tight">{contact.label}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
@@ -1001,8 +1056,8 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                   onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
                   className={`mt-2 px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-bold text-xs uppercase tracking-widest transition-all active:scale-95 ${
                     isTrust
-                      ? 'bg-white text-brand hover:bg-accent hover:text-white dark:bg-white dark:text-brand dark:hover:bg-accent dark:hover:text-white shadow-xl shadow-black/10 dark:shadow-black/20'
-                      : 'bg-black text-white hover:bg-accent shadow-xl shadow-black/10 hover:shadow-accent/20 dark:bg-accent dark:text-white dark:hover:bg-white dark:hover:text-brand dark:shadow-accent/25'
+                      ? 'bg-white text-brand hover:bg-accent hover:text-white dark:bg-[#121826] dark:text-white dark:hover:bg-accent dark:hover:text-white shadow-xl shadow-black/10 dark:shadow-black/20'
+                      : 'bg-black text-white hover:bg-accent shadow-xl shadow-black/10 hover:shadow-accent/20 dark:bg-[#121826] dark:text-white dark:hover:bg-accent dark:hover:text-white dark:shadow-accent/25'
                   }`}
                 >
                   {slide.data.primaryCta.label}
@@ -1084,7 +1139,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             : slide.id === 'slide-why'
               ? 'py-8 md:slide-height md:py-24'
             : slide.id === 'slide-problems'
-              ? 'slide-height pt-10 pb-3 md:pt-24 md:pb-8'
+              ? 'slide-height pt-10 pb-2 md:pt-24 md:pb-2'
               : 'slide-height py-10 md:py-24'
       } ${
         slide.id === 'slide-problems'
@@ -1102,7 +1157,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                 : ''
       }`}
     >
-      <div className={`flex-grow container-wide ${isLightLockedHero ? 'text-brand' : 'text-brand dark:text-white'}`}>{renderContent()}</div>
+      <div className={`flex-grow container-wide ${isLightLockedHero ? 'text-black' : 'text-brand dark:text-white'}`}>{renderContent()}</div>
     </motion.section>
   );
 };
