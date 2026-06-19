@@ -1143,3 +1143,12 @@ if (!SLIDES.some((slide) => slide.id === 'slide-7')) {
     },
   });
 }
+
+const skillSlideIndex = SLIDES.findIndex((slide) => slide.id === 'slide-7');
+const teamSlideIndex = SLIDES.findIndex((slide) => slide.id === 'slide-why');
+
+if (skillSlideIndex !== -1 && teamSlideIndex !== -1) {
+  const [skillSlide] = SLIDES.splice(skillSlideIndex, 1);
+  const updatedTeamIndex = SLIDES.findIndex((slide) => slide.id === 'slide-why');
+  SLIDES.splice(updatedTeamIndex + 1, 0, skillSlide);
+}
