@@ -295,7 +295,20 @@ const buildCasePreview = (item: any) => ({
 export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   const [selectedCase, setSelectedCase] = React.useState<ModalCaseData | null>(null);
   const [openTooltipId, setOpenTooltipId] = React.useState<string | null>(null);
+  const [isMobileViewport, setIsMobileViewport] = React.useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false,
+  );
   const isLightLockedHero = slide.id === 'slide-1';
+  const isMobileCasesSection = slide.id === 'slide-11' && isMobileViewport;
+
+  React.useEffect(() => {
+    const syncViewport = () => setIsMobileViewport(window.innerWidth < 768);
+
+    syncViewport();
+    window.addEventListener('resize', syncViewport, { passive: true });
+
+    return () => window.removeEventListener('resize', syncViewport);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -321,6 +334,16 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       },
     },
   };
+
+  const caseMotionProps = isMobileCasesSection
+    ? {
+        initial: false as const,
+        animate: { opacity: 1, y: 0, scale: 1 },
+        transition: { duration: 0.01 },
+      }
+    : {
+        variants: itemVariants,
+      };
 
   const renderHero = () => (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 h-full items-start">
@@ -747,7 +770,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       <>
         <div className="flex flex-col h-auto justify-start md:h-full md:justify-center">
           <motion.h2
-            variants={itemVariants}
+            {...caseMotionProps}
             className="text-3xl md:text-6xl font-display font-medium mb-16 md:mb-24 tracking-tightest leading-none"
           >
             {slide.title}
@@ -766,7 +789,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                     return (
                       <motion.div
                         key={item.client}
-                        variants={itemVariants}
+                        {...caseMotionProps}
                         className="group flex flex-col cursor-pointer rounded-[1.5rem] md:rounded-[2rem] border border-gray-100 dark:border-white/10 bg-white/70 dark:bg-white/5 p-4 md:p-8 hover:-translate-y-1 transition-all duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         onClick={() => setSelectedCase(item)}
                         role="button"
@@ -1125,10 +1148,17 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   return (
     <motion.section
       id={slide.id}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      variants={containerVariants}
+      {...(isMobileCasesSection
+        ? {
+            initial: false,
+            animate: { opacity: 1 },
+          }
+        : {
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, amount: 0.1 },
+            variants: containerVariants,
+          })}
       className={`relative md:snap-start px-4 md:px-12 lg:px-20 flex flex-col overflow-visible ${
         slide.id === 'slide-1'
           ? 'min-h-[70vh] min-h-[70svh] pt-[108px] pb-5 md:pt-[140px] md:pb-10 bg-white'
