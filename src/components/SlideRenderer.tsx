@@ -293,6 +293,7 @@ const buildCasePreview = (item: any) => ({
 });
 
 export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
+  const mainSiteUrl = 'https://tolk-usite.com/';
   const [selectedCase, setSelectedCase] = React.useState<ModalCaseData | null>(null);
   const [openTooltipId, setOpenTooltipId] = React.useState<string | null>(null);
   const [isMobileViewport, setIsMobileViewport] = React.useState(() =>
@@ -1009,15 +1010,27 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               {slide.footer}
             </motion.p>
           )}
-          {slide.data?.primaryCta && (
-            <motion.button
+          <div className="flex flex-wrap gap-3">
+            {slide.data?.primaryCta && (
+              <motion.button
+                variants={itemVariants}
+                onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-6 py-3 md:px-8 md:py-4 bg-brand dark:bg-[#121826] text-white dark:text-white rounded-xl md:rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all shadow-xl hover:shadow-accent/20 active:scale-95"
+              >
+                {slide.data?.primaryCta?.label}
+              </motion.button>
+            )}
+            <motion.a
               variants={itemVariants}
-              onClick={() => document.getElementById(slide.data?.primaryCta?.targetId || 'slide-13')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 py-3 md:px-8 md:py-4 bg-brand dark:bg-[#121826] text-white dark:text-white rounded-xl md:rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all shadow-xl hover:shadow-accent/20 active:scale-95"
+              href={mainSiteUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-accent text-white rounded-xl md:rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-brand dark:hover:bg-[#121826] transition-all shadow-xl hover:shadow-brand/20 active:scale-95"
             >
-              {slide.data?.primaryCta?.label}
-            </motion.button>
-          )}
+              <span>Перейти на главный сайт</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" focusable="false" />
+            </motion.a>
+          </div>
         </div>
         <div className="space-y-4">
           {slide.data?.contacts?.map((contact: any, idx: number) => (

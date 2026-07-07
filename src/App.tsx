@@ -5,11 +5,12 @@
 
 import React from 'react';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'motion/react';
-import { ArrowUp, Menu, Moon, Sun, X as CloseIcon } from 'lucide-react';
+import { ArrowRight, ArrowUp, Menu, Moon, Sun, X as CloseIcon } from 'lucide-react';
 import { SlideRenderer } from './components/SlideRenderer.tsx';
 import { SLIDES } from './types.ts';
 
 export default function App() {
+  const mainSiteUrl = 'https://tolk-usite.com/';
   const { scrollYProgress } = useScroll();
   const prefersReducedMotion = useReducedMotion();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -156,6 +157,15 @@ export default function App() {
           >
             Обсудить проект
           </button>
+          <a
+            href={mainSiteUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all shadow-lg bg-accent text-white hover:bg-brand hover:text-white active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            <span>На главный сайт</span>
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" focusable="false" />
+          </a>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`lg:hidden p-2 ${isHeroActive ? 'text-gray-500' : 'text-gray-400 dark:text-gray-300'}`}
@@ -192,7 +202,7 @@ export default function App() {
                 </motion.button>
               ))}
             </div>
-            <div className="mt-auto pb-8 md:pb-12">
+            <div className="mt-auto pb-8 md:pb-12 grid grid-cols-1 gap-3">
               <button
                 onClick={() => scrollToSection('slide-13')}
                 className={`w-full py-3.5 md:py-6 rounded-[1.2rem] md:rounded-3xl font-display font-medium text-base md:text-xl shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
@@ -203,6 +213,15 @@ export default function App() {
               >
                 Обсудить проект
               </button>
+              <a
+                href={mainSiteUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 py-3.5 md:py-6 rounded-[1.2rem] md:rounded-3xl font-display font-medium text-base md:text-xl shadow-2xl bg-accent text-white hover:bg-brand transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                <span>На главный сайт</span>
+                <ArrowRight className="h-5 w-5" aria-hidden="true" focusable="false" />
+              </a>
             </div>
           </motion.div>
         )}
