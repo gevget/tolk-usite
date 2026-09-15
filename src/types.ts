@@ -857,7 +857,7 @@ export const SLIDES: SlideContent[] = [
       },
       {
         title: 'Первая версия продукта',
-        details: 'Быстрая проверка идеи без долгой разработки.',
+        details: 'Веб-MVP, который можно быстро показать клиентам и проверить в реальных сценариях.',
         icon: 'Rocket',
         image: '/src/assets/images/MVP.png'
       },
@@ -869,7 +869,7 @@ export const SLIDES: SlideContent[] = [
       },
       {
         title: 'Платформа или сервис для партнёров',
-        details: 'Собираем цифровой контур для клиентов, дилеров и партнёров без лишней стройки.',
+        details: 'Веб-платформа для клиентов, дилеров и партнёров без лишней разработки.',
         icon: 'Layers',
         image: '/src/assets/images/b2b.png'
       }
@@ -959,7 +959,7 @@ export const SLIDES: SlideContent[] = [
       },
       {
         title: 'Рабочую первую версию',
-        details: 'Не концепт, а продукт, который можно показать и использовать.',
+        details: 'Рабочий веб-MVP, который можно показать, использовать и развивать дальше.',
         icon: 'Palette',
         image: '/src/assets/images/4 mvp.png'
       },
