@@ -764,9 +764,9 @@ const LEGACY_SLIDES: SlideContent[] = [
     description: 'Нужен не просто подрядчик, а связка продукт + дизайн + разработка + AI — это к нам.',
     data: {
       contacts: [
-        { label: 'Telegram', value: 'https://t.me/gevget' },
-        { label: 'WhatsApp', value: 'https://wa.me/79527733669' },
-        { label: 'Email', value: 'mailto:info@tolk-usite.ru' }
+        { label: 'Telegram', value: 'https://t.me/mixayumatov' },
+        { label: 'WhatsApp', value: 'https://wa.me/79307153144' },
+        { label: 'Email', value: 'mailto:info@tolk-usite.com' }
       ]
     },
     footer: 'Пришлите задачу — предложим варианты решения.',
@@ -1096,9 +1096,9 @@ export const SLIDES: SlideContent[] = [
     footer: 'Предложим варианты решения, сроки и план работ.',
     data: {
       contacts: [
-        { label: 'Telegram', value: 'https://t.me/gevget' },
-        { label: 'WhatsApp', value: 'https://wa.me/79527733669' },
-        { label: 'Почта', value: 'mailto:info@tolk-usite.ru' }
+        { label: 'Telegram', value: 'https://t.me/mixayumatov' },
+        { label: 'WhatsApp', value: 'https://wa.me/79307153144' },
+        { label: 'Почта', value: 'mailto:info@tolk-usite.com' }
       ]
     }
   }
