@@ -2,6 +2,8 @@ import React, { lazy, Suspense } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { SlideContent } from '../types';
 import { getAssetDimensions, resolveAssetPath } from '../utils/resolveAssetPath';
+import logoBlue from '../assets/images/tolk-just-blue.svg';
+import logoWhite from '../assets/images/tolk-just-white.svg';
 import {
   Activity,
   AlertCircle,
@@ -270,6 +272,7 @@ type ModalCaseData = {
   client: string;
   task: string;
   image: string;
+  projectUrl?: string;
   preview?: {
     problem?: string;
     solution?: string;
@@ -361,12 +364,14 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
               {slide.data?.eyebrow}
             </span>
           </div>
-          <motion.p
-            variants={itemVariants}
-            className="text-2xl md:text-[2.625rem] font-display font-medium leading-[0.9] mb-6 md:mb-8 tracking-tightest text-black/40"
-          >
-            {slide.data?.brand}
-          </motion.p>
+          {slide.data?.brand && (
+            <motion.p
+              variants={itemVariants}
+              className="text-2xl md:text-[2.625rem] font-display font-medium leading-[0.9] mb-6 md:mb-8 tracking-tightest text-black/40"
+            >
+              {slide.data.brand}
+            </motion.p>
+          )}
           <motion.h1
             variants={itemVariants}
             className="text-4xl md:text-[3.625rem] font-display font-medium leading-[0.95] mb-6 md:mb-8 tracking-tightest text-black max-w-5xl"
@@ -756,7 +761,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
   );
 
   const renderCases = () => {
-    const caseMap = new Map(slide.data.filter((item: any) => item.client !== 'Catalon').map((item: any) => [item.client, item]));
+    const caseMap = new Map(slide.data.filter((item: any) => item.client !== 'Каталон').map((item: any) => [item.client, item]));
     const rowKeys = [
       ['ФНС / Мой налог', 'Яндекс Support AI'],
       ['Döcke (DSC)', 'STOLKOM', 'SIMB-AD'],
@@ -929,6 +934,7 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       client: product.name,
       task: product.info,
       image: product.image,
+      projectUrl: product.projectUrl,
       fullContent: product.fullContent,
     }));
 
@@ -979,6 +985,18 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
                       </h3>
                     </div>
                     <p className="text-gray-500 dark:text-gray-300 text-base md:text-lg leading-relaxed">{product.task}</p>
+                    {product.projectUrl && (
+                      <a
+                        href={product.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(event) => event.stopPropagation()}
+                        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-accent hover:text-brand dark:hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      >
+                        <span>Сайт проекта</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" focusable="false" />
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               );
@@ -991,6 +1009,57 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
       </>
     );
   };
+
+  const renderIdeas = () => (
+    <div className="flex flex-col justify-center h-full">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-10 md:gap-16 lg:gap-24 items-center">
+        <div className="max-w-xl">
+          <motion.span variants={itemVariants} className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-6 block">
+            {slide.data?.eyebrow}
+          </motion.span>
+          <motion.h2
+            variants={itemVariants}
+            className="text-4xl md:text-6xl font-display font-medium tracking-tightest leading-[0.92] text-brand dark:text-white mb-8"
+          >
+            {slide.title}
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-lg md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 mb-8 max-w-lg">
+            {slide.description}
+          </motion.p>
+          {slide.footer && (
+            <motion.p variants={itemVariants} className="text-sm md:text-base leading-relaxed text-gray-400 dark:text-gray-500 mb-10 max-w-md">
+              {slide.footer}
+            </motion.p>
+          )}
+          <motion.a
+            variants={itemVariants}
+            href={slide.data?.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 rounded-full bg-brand px-6 py-4 text-xs font-bold uppercase tracking-[0.16em] text-white transition-all hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent dark:bg-white dark:text-black dark:hover:bg-accent dark:hover:text-white"
+          >
+            <span>{slide.data?.ctaLabel || 'Смотреть идеи'}</span>
+            <ArrowRight className="w-4 h-4" aria-hidden="true" focusable="false" />
+          </motion.a>
+        </div>
+
+        <motion.div
+          variants={itemVariants}
+          className="relative overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-200/70 bg-[#f5f1ea] dark:border-white/10 dark:bg-white/5"
+        >
+          <img
+            src={resolveAssetPath(slide.data?.image)}
+            alt="Идея превращается в цифровой продукт"
+            className="block w-full h-auto"
+            width={getAssetDimensions(slide.data?.image)?.width}
+            height={getAssetDimensions(slide.data?.image)?.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </motion.div>
+      </div>
+    </div>
+  );
 
   const renderCta = () => (
     <div className="flex flex-col">
@@ -1037,15 +1106,33 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
             <motion.a
               key={idx}
               href={contact.value}
+              target="_blank"
+              rel="noreferrer"
               variants={itemVariants}
-            className="flex items-center justify-between p-4 md:p-8 bg-brand dark:bg-[#121826] text-white dark:text-white rounded-[1.2rem] md:rounded-3xl hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all w-full group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="flex items-center justify-between p-4 md:p-8 bg-brand dark:bg-[#121826] text-white dark:text-white rounded-[1.2rem] md:rounded-3xl hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-all w-full group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <span className="text-xl font-medium tracking-tight">{contact.label}</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" aria-hidden="true" focusable="false" />
             </motion.a>
           ))}
         </div>
       </div>
+      <footer className="mt-16 md:mt-24 flex items-center justify-between gap-4 border-t border-brand/10 dark:border-white/10 pt-6">
+        <img
+          src={logoBlue}
+          alt="Толк × ЮСТ"
+          width="329"
+          height="36"
+          className="h-5 w-auto md:h-6 dark:hidden"
+        />
+        <img
+          src={logoWhite}
+          alt="Толк × ЮСТ"
+          width="329"
+          height="36"
+          className="hidden h-5 w-auto md:h-6 dark:block"
+        />
+      </footer>
     </div>
   );
 
@@ -1149,6 +1236,8 @@ export const SlideRenderer: React.FC<{ slide: SlideContent }> = ({ slide }) => {
         return renderManifest();
       case 'products':
         return renderProducts();
+      case 'ideas':
+        return renderIdeas();
       case 'conversion':
         return renderConversion();
       case 'cta':

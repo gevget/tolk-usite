@@ -1,6 +1,6 @@
-# TOLK × USITE
+# Толк × ЮСТ
 
-Frontend-презентация для TOLK × USITE на базе Vite, React и TypeScript. Проект собирается в статический production build и подходит для переноса на обычный веб-сервер или CDN.
+Frontend-презентация для Толк × ЮСТ на базе Vite, React и TypeScript. Проект собирается в статическую production-версию и подходит для переноса на обычный веб-сервер или CDN.
 
 ## Стек
 

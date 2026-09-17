@@ -11,6 +11,7 @@ import uxCard from '../assets/images/generated-explaining-interface.webp';
 import firstVersionCard from '../assets/images/generated-working-web-mvp.webp';
 import contourCard from '../assets/images/generated-team-contour.webp';
 import growthBaseCard from '../assets/images/generated-growth-base.webp';
+import ideasLab from '../assets/images/generated-ideas-lab.webp';
 import dscInner from '../assets/images/dsc 1.png';
 import dsc from '../assets/images/dsc.webp';
 import b2bCard from '../assets/images/generated-partner-web-platform.webp';
@@ -66,6 +67,7 @@ const importedAssetMap: Record<string, string> = {
   '/src/assets/images/4 mvp.png': firstVersionCard,
   '/src/assets/images/5 cont.png': contourCard,
   '/src/assets/images/6 baza.png': growthBaseCard,
+  '/src/assets/images/generated-ideas-lab.webp': ideasLab,
   '/src/assets/images/dsc 1.png': dscInner,
   '/src/assets/images/dsc.jpg': dsc,
   '/src/assets/images/b2b.png': b2bCard,
@@ -147,6 +149,7 @@ const assetDimensionsMap: Record<string, { width: number; height: number }> = {
   '/src/assets/images/vod.png': { width: 680, height: 510 },
   '/src/assets/images/yandex.jpg': { width: 680, height: 510 },
   '/src/assets/images/ai 1.png': { width: 1280, height: 721 },
+  '/src/assets/images/generated-ideas-lab.webp': { width: 1774, height: 887 },
   '/src/assets/images/catalon 2.png': { width: 1280, height: 569 },
   '/src/assets/images/dsc 1.png': { width: 1280, height: 569 },
   '/src/assets/images/fns 1.png': { width: 1280, height: 569 },

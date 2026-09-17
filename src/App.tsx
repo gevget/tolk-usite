@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 
 import { ArrowRight, ArrowUp, Menu, Moon, Sun, X as CloseIcon } from 'lucide-react';
 import { SlideRenderer } from './components/SlideRenderer.tsx';
 import { SLIDES } from './types.ts';
+import logoBlue from './assets/images/tolk-just-blue.svg';
 
 export default function App() {
   const mainSiteUrl = 'https://tolk-usite.com/';
@@ -30,6 +31,7 @@ export default function App() {
     }
     return false;
   });
+  const headerLogo = logoBlue;
 
   React.useEffect(() => {
     if (isDark) {
@@ -90,6 +92,7 @@ export default function App() {
     { label: 'Команда', id: 'slide-why' },
     { label: 'Кейсы', id: 'slide-11' },
     { label: 'Продукты', id: 'slide-12' },
+    { label: 'Идеи', id: 'slide-ideas' },
     { label: 'Контакты', id: 'slide-13' },
   ];
 
@@ -102,13 +105,13 @@ export default function App() {
         isHeroActive ? 'bg-white/72 backdrop-blur-xl border-b border-gray-200/60 shadow-[0_8px_22px_rgba(15,23,42,0.05)]' : 'glass-nav'
       }`}>
         <div className="flex items-center gap-4 lg:gap-8">
-          <div
-            className="flex items-center gap-2 text-white"
-            style={{ mixBlendMode: 'difference' }}
-          >
-            <div className="h-2.5 w-2.5 rounded-full bg-current" />
-            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-current">TOLK × USITE</span>
-          </div>
+          <img
+            src={headerLogo}
+            alt="Толк × ЮСТ"
+            width="329"
+            height="36"
+            className="h-4 w-auto md:h-[19px]"
+          />
           <nav className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => (
               <button
@@ -122,7 +125,15 @@ export default function App() {
                       : 'text-gray-400 dark:text-gray-300 hover:text-accent dark:hover:text-white'
                 }`}
               >
-                {item.label}
+                <span className="inline-flex items-center gap-1.5">
+                  {item.label}
+                  {item.id === 'slide-11' && (
+                    <span className="relative flex h-2 w-2" aria-hidden="true">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-accent shadow-[0_0_10px_rgba(35,107,247,0.8)]" />
+                    </span>
+                  )}
+                </span>
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="nav-active"
@@ -198,7 +209,15 @@ export default function App() {
                     activeSection === item.id ? 'text-accent' : isHeroActive ? 'text-brand hover:text-accent' : 'text-brand dark:text-white hover:text-accent'
                   }`}
                 >
-                  {item.label}
+                  <span className="inline-flex items-center gap-2">
+                    {item.label}
+                    {item.id === 'slide-11' && (
+                      <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_12px_rgba(35,107,247,0.8)]" />
+                      </span>
+                    )}
+                  </span>
                 </motion.button>
               ))}
             </div>

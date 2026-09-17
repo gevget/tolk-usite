@@ -11,6 +11,7 @@ interface CaseModalProps {
     client: string;
     task: string;
     image: string;
+    projectUrl?: string;
     fullContent: {
       title: string;
       subtitle: string;
@@ -197,6 +198,17 @@ export const CaseModal: React.FC<CaseModalProps> = ({ isOpen, onClose, caseData 
                         <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl leading-relaxed">
                           {caseData.task}
                         </p>
+                        {caseData.projectUrl && (
+                          <a
+                            href={caseData.projectUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                          >
+                            <span>Сайт проекта</span>
+                            <ArrowRight className="w-4 h-4" aria-hidden="true" focusable="false" />
+                          </a>
+                        )}
                       </section>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">

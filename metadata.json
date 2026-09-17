@@ -1,6 +1,6 @@
 {
-  "name": "TOLK × USITE 2026",
-  "description": "Minimalist director-level B2B presentation focusing on design, AI, and digital systems for business efficiency.",
+  "name": "Толк × ЮСТ 2026",
+  "description": "Минималистичная B2B-презентация о дизайне, ИИ и цифровых системах для эффективности бизнеса.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
